@@ -1,33 +1,17 @@
-# Website
+The live docs for public preview are currently available at https://docs.wandisco.com/live-data-migrator/docs/ but are shortly moving to https://wandisco.github.io/wandisco-documentation-ldm/
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+This product is currently in public preview
 
-### Installation
+[About](about.md)
 
-```
-$ yarn
-```
+[Quickstart](quickstart.md)
 
-### Local Development
+[Getting started](getting-started.md)
 
-```
-$ yarn start
-```
+[Operation](operation.md)
 
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
+[Configuration](configuration.md)
 
-### Build
+[Command Reference](command-reference.md)
 
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-```
-$ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+[API Reference](api-reference.md)
