@@ -1,0 +1,18 @@
+{
+  "id": "operation",
+  "isDocsHomePage": false,
+  "title": "Operation",
+  "description": "LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.",
+  "source": "@site/docs/operation.md",
+  "permalink": "/wandisco-documentation-ldm/docs/operation",
+  "sidebar_label": "Operation",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Getting Started",
+    "permalink": "/wandisco-documentation-ldm/docs/getting-started"
+  },
+  "next": {
+    "title": "Configuration",
+    "permalink": "/wandisco-documentation-ldm/docs/configuration"
+  }
+}

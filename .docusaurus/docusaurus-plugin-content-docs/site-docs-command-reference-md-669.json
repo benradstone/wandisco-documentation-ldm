@@ -1,0 +1,18 @@
+{
+  "id": "command-reference",
+  "isDocsHomePage": false,
+  "title": "Command Reference",
+  "description": "LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.",
+  "source": "@site/docs/command-reference.md",
+  "permalink": "/wandisco-documentation-ldm/docs/command-reference",
+  "sidebar_label": "Command Reference",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Configuration",
+    "permalink": "/wandisco-documentation-ldm/docs/configuration"
+  },
+  "next": {
+    "title": "API Reference",
+    "permalink": "/wandisco-documentation-ldm/docs/api-reference"
+  }
+}

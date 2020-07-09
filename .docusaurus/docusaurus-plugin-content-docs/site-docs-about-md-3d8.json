@@ -1,0 +1,14 @@
+{
+  "id": "about",
+  "isDocsHomePage": true,
+  "title": "About LiveData Migrator",
+  "description": "LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.",
+  "source": "@site/docs/about.md",
+  "permalink": "/wandisco-documentation-ldm/docs/",
+  "sidebar_label": "About",
+  "sidebar": "someSidebar",
+  "next": {
+    "title": "Quickstart",
+    "permalink": "/wandisco-documentation-ldm/docs/quickstart"
+  }
+}

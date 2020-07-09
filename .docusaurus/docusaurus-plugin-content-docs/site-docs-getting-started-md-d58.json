@@ -1,0 +1,18 @@
+{
+  "id": "getting-started",
+  "isDocsHomePage": false,
+  "title": "Getting Started",
+  "description": "LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.",
+  "source": "@site/docs/getting-started.md",
+  "permalink": "/wandisco-documentation-ldm/docs/getting-started",
+  "sidebar_label": "Getting Started",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Quickstart",
+    "permalink": "/wandisco-documentation-ldm/docs/quickstart"
+  },
+  "next": {
+    "title": "Operation",
+    "permalink": "/wandisco-documentation-ldm/docs/operation"
+  }
+}
