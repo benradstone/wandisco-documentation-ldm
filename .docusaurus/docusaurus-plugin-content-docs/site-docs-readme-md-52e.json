@@ -1,8 +1,0 @@
-{
-  "id": "readme",
-  "isDocsHomePage": false,
-  "title": "readme",
-  "description": "The live docs for public preview are currently available at https://docs.wandisco.com/live-data-migrator/docs/",
-  "source": "@site/docs/readme.md",
-  "permalink": "/wandisco-documentation-ldm/docs/readme"
-}
