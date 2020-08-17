@@ -1,7 +1,7 @@
 ---
-id: operation
-title: Operation
-sidebar_label: Operation
+id: operation-cli
+title: Using LiveData Migrator through the Command Line
+sidebar_label: CLI
 ---
 
 :::note Public Preview
@@ -10,7 +10,7 @@ LiveData Migrator is in public preview. This gives you access to all product fun
 
 Here, you'll find information about how to interact with LiveData Migrator to create and manage resources that control your migrations.
 
-If you're new to the concept of LiveData, or want to know what LiveData Migrator does, please read the [introduction to LiveData Migrator](./about.md) before learning [how to install](./getting-started.md) and use the product.
+If you're new to the concept of LiveData, or want to know what LiveData Migrator does, please read the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use the product.
 
 ## Operating LiveData Migrator
 

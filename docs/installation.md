@@ -1,7 +1,7 @@
 ---
-id: getting-started
-title: Getting Started
-sidebar_label: Getting Started
+id: installation
+title: Installation
+sidebar_label: Installation
 ---
 
 :::note Public Preview
@@ -183,4 +183,4 @@ When run as a system service, LiveData Migrator will honor the [configuration fo
 
 # LiveData Migrator Operation
 
-Once you have LiveData Migrator running, you will [interact with the action prompt](./operation.md) to configure, manage and monitor resources that control how your migration takes place.
+Once you have LiveData Migrator running, you will [interact with the action prompt](./operation-cli.md) to configure, manage and monitor resources that control how your migration takes place.
