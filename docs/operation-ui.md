@@ -1,7 +1,7 @@
 ---
 id: operation-ui
-title: Operation - UI
-sidebar_label: Operation - UI
+title: Using LiveData Migrator through the User Interface
+sidebar_label: UI
 ---
 
 ## Exclusion templates

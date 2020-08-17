@@ -6,9 +6,11 @@ These are the in development docs for GA:
 
 [Quickstart](quickstart.md)
 
-[Getting started](getting-started.md)
+[Installation](installation.md)
 
-[Operation](operation.md)
+**Using LiveData Migrator**
+* [UI](operation-ui.md)
+* [CLI](operation-cli.md)
 
 [Configuration](configuration.md)
 

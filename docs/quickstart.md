@@ -27,7 +27,7 @@ As the `hdfs` user on a cluster edge node:
 $ hadoop jar live-migrator.jar
 ```
 
-For more details, see the [Getting Started](./getting-started.md#running-livedata-migrator) guide.
+For more details, see the [Getting Started](./installation.md#running-livedata-migrator) guide.
 
 ## 2. Define your target
 
@@ -109,4 +109,4 @@ Monitor the operation of LiveData Migrator, including the average bandwidth used
 
 # Getting Started
 
-For a more comprehensive introduction to using LiveData Migrator, including installation, operation and the full set of commands, please read the [Getting Started](./getting-started.md) guide.
+For a more comprehensive introduction to using LiveData Migrator, including installation, operation and the full set of commands, please read the [Getting Started](./installation.md) guide.
