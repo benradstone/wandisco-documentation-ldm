@@ -4,7 +4,7 @@ title: Using LiveData Migrator with the UI
 sidebar_label: UI
 ---
 
-The UI can manage multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive to use and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
+The UI can manage multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
 
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
@@ -34,22 +34,22 @@ The Bandwidth panel shows how much bandwidth LiveData Migrator is currently usin
 
 ### Storage
 
-The Storage panel shows the underlying storage used by LiveData Migrator as either a Source or Target. LiveData Migrator supports one Source and one or more Targets. Each Storage displays its associated processes, such as which LiveData Migrator is used to access it.
+The Storage panel shows the underlying storage used by LiveData Migrator as either a source or target. LiveData Migrator supports one source and one or more targets. Each storage displays its associated processes, such as which LiveData Migrator is used to access it.
 
 Use the Storage panel to:
-* View and configure the Source and Target Storages
-* Add further Targets
+* View and configure the source and target storages
+* Add further targets
 * Add additional LiveData Migrators and LiveData Plane
 
-For more information about Sources and Targets, see the [introduction to LiveData Migrator](./about.md).
+For more information about sources and targets, see the [introduction to LiveData Migrator](./about.md).
 
 ### Rules and Migrations
 
-The Rules and Migrations panel in LiveData Migrator shows migrations and their progress. If the UI also manages LiveData Plane, the panel will also show Rules.
+The Rules and Migrations panel in LiveData Migrator shows migrations and their progress. If the UI also manages LiveData Plane, the panel will also show rules.
 
 Use the Rules and Migrations panel to:
-* Add further Migrations or Rules
-* View more detail about existing Rules and Migrations
+* Add further migrations or rules
+* View more detail about existing rules and migrations
 
 ### Notifications
 
@@ -57,33 +57,33 @@ The bell icon in the top-right of the UI is where you'll receive Notifications a
 
 ## Migrate data
 
-### Configure Storage
+### Configure storage
 
-Configure your Storages to define at least one Source and at least one Target to migrate data. LiveData Migrator will connect to these Storages for migration.
-* Supported Sources are: **HDFS**
-* Supported Targets are: **ADSL Gen2** and **S3**
+Configure your storages to define at least one source and at least one target to migrate data. LiveData Migrator will connect to these storages for migration.
+* Supported sources are: **HDFS**
+* Supported targets are: **ADSL Gen2** and **S3**
 
 You can also use the Storage panel to:
 * Configure S3-compatible Targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
-* Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective Storages.
+* Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
 
-### Create Migrations
+### Create migrations
 
-Migrations transfer existing data from the defined Source to a Target. LiveData Migrator migrates any changes made to the Source data while it is being migrated and ensures that the Target is up to date with those changes. It does this while continuing to perform the migration.
+Migrations transfer existing data from the defined source to a target. LiveData Migrator migrates any changes made to the source data while it is being migrated and ensures that the target is up to date with those changes. It does this while continuing to perform the migration.
 
-You will typically create multiple migrations so that you can select specific content from your Source Storage by Path. You can also migrate to multiple independent Storages at the same time by defining multiple migration resources.
+You will typically create multiple migrations so that you can select specific content from your source storage by Path. You can also migrate to multiple independent storages at the same time by defining multiple migration resources.
 
 To create a migration:
 
-1. Choose a Source and Target from previously defined [Storages](##ConfiguringStorage).
+1. Choose a source and target from previously defined [Storages](##ConfiguringStorage).
 2. Choose the Path to set the scope of the migration.
 3. [Apply any Exclusions](###Assignexclusiontemplatestoanewmigration) to reduce the scope within this Path.
 
 Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](##ViewingMigrations).
 
-### View Migrations
+### View migrations
 
-The Dashboard displays an overview of Migrations and their status, showing what pre-existing data has been moved and data added since the Migration started.
+The Dashboard displays an overview of migrations and their status, showing what pre-existing data has been moved and data added since the migration started.
 
 Click into the migrations to see more detail.
 
@@ -101,7 +101,7 @@ Assign exclusion templates to new migration or existing migrations. Adding exclu
 Default exclusions will automatically apply to certain storages depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 5TB.
 :::
 
-### Add new exclusion
+### Add new exclusions
 
 1. In the **Storages** list on the dashboard, click the settings cog for the appropriate storage.
 1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
@@ -126,7 +126,7 @@ This will not remove the exclusion from an existing migration. See the [Remove e
 
 ### Assign exclusion templates to a new migration
 
-1. In the new migration page, **Add new exclusion**
+1. In the new migration page, click **Add new exclusion**
 1. Select the appropriate exclusion template from the drop-down list.
 
 The exclusion appears in the list, and can be removed before the migration is started.
