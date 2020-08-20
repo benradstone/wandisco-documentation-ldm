@@ -4,56 +4,54 @@ title: Using LiveData Migrator through the User Interface
 sidebar_label: UI
 ---
 
-Here, you'll find information about how to use the User Interface (UI) to interact with LiveData Migrator to create and manage resources that control your migrations.
+You can use either the UI or the CLI to use LiveData Migrator. This page tells you how to use the UI to interact with LiveData Migrator to create and manage resources that control your migrations.
 
-If you're new to the concept of LiveData, or want to know what LiveData Migrator does, please read the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use the product.
+The UI is designed to be capable of managing multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive to use, and most often you should be able to use LiveData Migrator by following the instructions on-screen.
 
-The UI is designed to be capable of managing multiple LiveData Migrators as well as LiveData Plane from one convenient interface.
+If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
-How to use the UI is described in the interface itself, including what information is required for operation and how to obtain it. This guide therefore provides a high level overview of the functioanlity provided and how to engage with it.
+## Access the UI
 
-## Accessing the User Interface
-
-The User Interface is available on port 8081 by default on the host you have installed LiveData Migrator, for example when running it locally:
+The User Interface is available on port 8081 by default on the host you have installed LiveData Migrator. For example, if you were running it locally, the port would be:
 
 http://127.0.0.1:8081
 
-## Registration
+## Register
 
-When first accessing the UI, a short registration form is presented. This will create a user account for subsequent access to the UI.
+You'll be asked to register a LiveData Migrator account the first time you use the UI. Fill in the registration form to create your user account.
 
-Internet access from the host is not required, but when it is available, a confirmation of the registration will be sent. This information will be used to send important information about your LiveData Migrator use, such as informing you before your license expires.
+Internet access from the host is not required, but when it is available, you'll be sent confirmation of your registration. We'll use your registration information to send you important information about your LiveData Migrator account, such as a reminder before your license expires. You can also opt in to receive additional product updates.
 
-It is also possible to opt in to receive additional product updates.
+## Using the UI
 
-## Overview
-
-The UI presents four main panels, as well as a Notification system.
+The UI has four main panels and a Notification system.
 
 ### License information
 
-This panel shows current license information, including warnings if the product is approaching license limits.
-
-It also provides the ability to upload a new license.
+Use the License information panel to see current license information (including warnings if the product is approaching license limits), and uploading a new license.
 
 ### Bandwidth usage
 
-This panel shows how much bandwidth the product is currently using to migrate data. It shows this over the most recent 5 minute period and contiually updates. The left axis scales automatically to accomodate the highest throughput during that period.
+The Bandwidth panel shows how much bandwidth LiveData Migrator is currently using to migrate data. It shows this over the most recent 5 minute period and continually updates. The left axis scales automatically to accommodate the highest throughput during that period.
 
 ### Storage
 
-This panel shows the underlying storage used by LiveData Migrator as either a Source or Target. LiveData Migrator supports one Source and one or more Targets, which is described further in the [introduction to LiveData Migrator](./about.md).
+The Storage panel shows the underlying storage used by LiveData Migrator as either a Source or Target. LiveData Migrator supports one Source and one or more Targets. Each Storage displays its associated processes, such as which LiveData Migrator is used to access it.
 
-It is possible to view and configure the Source and Target Storages from here, as well as adding further Targets or even additional LiveData Migrators and LiveData Plane.
+Use the Storage panel to:
+* View and configure the Source and Target Storages
+* Adding further Targets
+* Adding additional LiveData Migrators and LiveData Plane
 
-Each Storage will display its associated processes, such as which LiveData Migrator is used to access it. Configuration of the specific processes is also possible here.
+For more information about Sources and Targets, see the [introduction to LiveData Migrator](./about.md).
 
-### Rules / Migrations
+### Rules and Migrations
 
-In the context of LiveData Migrator this panel shows Migrations and their progress.
-When the UI is configured to manage LiveData Plane as well, Rules will be displayed here as well.
+The Rules and Migrations panel in LiveData Migrator shows migrations and their progress. Where the UI also manages LiveData Plane, the panel will also show Rules.
 
-It is possible to add further Migrations or Rules from this panel, and view more detail about existing ones.
+Use the Rules and Migrations panel to:
+* Add further Migrations or Rules
+* View more detail about existing Rules and Migrations
 
 ### Notifications
 
@@ -124,7 +122,7 @@ Click **Add new exclusion** to associate the exclusion with this storage and ent
 * **Name** - The name given to the exclusion template (for example: `100gbfilelimit`).
 * **Description** - A brief description of what the exclusion is doing (for example: "_Files larger than 100GB are excluded_").
 * _File Size_ = **Value / Unit**
-  * The value and unit for the file size limit (for example: `100` `GB`). 
+  * The value and unit for the file size limit (for example: `100` `GB`).
 * _Regex_ = **Regex**
   * The regex pattern to be used for the filename exclusion (for example: `/**/.hive-staging**`)
 
