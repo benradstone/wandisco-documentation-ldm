@@ -13,3 +13,11 @@ The live docs for public preview are currently available at https://docs.wandisc
 [Command Reference](command-reference.md)
 
 [API Reference](api-reference.md)
+
+## Running Docusaurus locally
+
+Requires Node.js >=10.15.1 and NPM.
+
+In this directory, run `npm i` to install dependencies, followed by `npm start`. 
+
+Your browser should open the correct location automatically, if not, it is run at `http://localhost:3000/wandisco-documentation-ldm/` by default.
