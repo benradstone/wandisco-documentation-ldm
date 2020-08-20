@@ -1,6 +1,6 @@
 ---
 id: operation-ui
-title: Using LiveData Migrator: UI
+title: Using LiveData Migrator - UI
 sidebar_label: UI
 ---
 
