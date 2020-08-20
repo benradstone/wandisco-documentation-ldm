@@ -1,28 +1,26 @@
 ---
 id: operation-ui
-title: Using LiveData Migrator through the User Interface
+title: Using LiveData Migrator: UI
 sidebar_label: UI
 ---
 
-You can use either the UI or the CLI to use LiveData Migrator. This page tells you how to use the UI to interact with LiveData Migrator to create and manage resources that control your migrations.
-
-The UI is designed to be capable of managing multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive to use, and most often you should be able to use LiveData Migrator by following the instructions on-screen.
+The UI can manage multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive to use and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
 
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
-## Access the UI
+## Before you start
 
-The User Interface is available on port 8081 by default on the host you have installed LiveData Migrator. For example, if you were running it locally, the port would be:
+The UI is available on port 8081 on the host with your LiveData Migrator installation. For example, if you were running LiveData Migrator locally, the port would be:
 
 http://127.0.0.1:8081
 
-## Register
+### Register
 
 You'll be asked to register a LiveData Migrator account the first time you use the UI. Fill in the registration form to create your user account.
 
 Internet access from the host is not required, but when it is available, you'll be sent confirmation of your registration. We'll use your registration information to send you important information about your LiveData Migrator account, such as a reminder before your license expires. You can also opt in to receive additional product updates.
 
-## How it works
+## How the UI works
 
 The UI has four main panels and a Notification system.
 
@@ -30,24 +28,24 @@ The UI has four main panels and a Notification system.
 
 Use the License information panel to see current license information (including warnings if the product is approaching license limits), and uploading a new license.
 
-### Bandwidth usage
+### Bandwidth usage
 
 The Bandwidth panel shows how much bandwidth LiveData Migrator is currently using to migrate data. It shows this over the most recent 5 minute period and continually updates. The left axis scales automatically to accommodate the highest throughput during that period.
 
-### Storage
+### Storage
 
 The Storage panel shows the underlying storage used by LiveData Migrator as either a Source or Target. LiveData Migrator supports one Source and one or more Targets. Each Storage displays its associated processes, such as which LiveData Migrator is used to access it.
 
 Use the Storage panel to:
 * View and configure the Source and Target Storages
-* Adding further Targets
-* Adding additional LiveData Migrators and LiveData Plane
+* Add further Targets
+* Add additional LiveData Migrators and LiveData Plane
 
 For more information about Sources and Targets, see the [introduction to LiveData Migrator](./about.md).
 
 ### Rules and Migrations
 
-The Rules and Migrations panel in LiveData Migrator shows migrations and their progress. Where the UI also manages LiveData Plane, the panel will also show Rules.
+The Rules and Migrations panel in LiveData Migrator shows migrations and their progress. If the UI also manages LiveData Plane, the panel will also show Rules.
 
 Use the Rules and Migrations panel to:
 * Add further Migrations or Rules
@@ -55,28 +53,19 @@ Use the Rules and Migrations panel to:
 
 ### Notifications
 
-The bell icon in the top-right of the UI provides access to a Notification system which will inform you of milestones in your use of the product or any errors or warnings which need to be considered.
+The bell icon in the top-right of the UI is where you'll receive Notifications about errors, warnings, or important milestones in your usage.
 
-## Using the UI for common tasks
+## Migrate data
 
 ### Configure Storage
 
-Before you can migrate data, you'll need to configure Storages in the Storage panel. LiveData Migrator connects to one Source and one or more Targets for migration.
+* Configure your Storages to define at least one Source and at least one Target to migrate data. LiveData Migrator will connect to these Storages for migration.
+    * Supported Sources are: **HDFS**
+    * Supported Targets are: **ADSL Gen2** and **S3**
+* Configure S3-compatible Targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
+* Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective Storages.
 
-1. Define a Source and at least one Target.
-
-    Supported Sources are:
-    * HDFS
-
-    Supported Targets are:
-    * ADSL Gen2
-    * S3
-
-1. Configure S3-compatible Targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
-1. Get information regarding the process used to access the Storage itself, and apply process-specific configuration, such as creating [Exclusion Templates](##Exclusiontemplates) to be used for Migrations.
-1. Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective Storages.
-
-## Creating Migrations
+### Create Migrations
 
 Migrations transfer existing data, and any subsequent changes made to data in their scope, automatically maintaining the data in the target to be as current as possible with any changes to the source while LiveData Migrator remains in operation.
 
@@ -90,7 +79,7 @@ To create a migration:
 
 Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](##ViewingMigrations).
 
-## Viewing Migrations
+### View Migrations
 
 The Dashboard displays an overview of Migrations and their status, showing what pre-existing data has been moved and data added since the Migration started.
 
@@ -100,7 +89,7 @@ Click into the migrations to see more detail.
 A migration must be stopped before it can be deleted.
 :::
 
-## Exclusion templates
+## Add and remove Exclusions
 
 Define exclusion templates to exclude certain file sizes or file names (defined using [regex](https://regexr.com/) patterns) during a migration. These templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
 
