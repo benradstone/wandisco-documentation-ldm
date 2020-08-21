@@ -53,7 +53,7 @@ Use the Rules and Migrations panel to:
 
 ### Notifications
 
-The bell icon in the top-right of the UI is where you'll receive Notifications about errors, warnings, or important milestones in your usage.
+The bell icon in the top-right of the UI is where you'll receive notifications about errors, warnings, or important milestones in your usage.
 
 ## Migrate data
 
@@ -75,11 +75,11 @@ You will typically create multiple migrations so that you can select specific co
 
 To create a migration:
 
-1. Choose a source and target from previously defined [Storages](##ConfiguringStorage).
+1. Choose a source and target from previously defined [storages](#configure-storage).
 2. Choose the Path to set the scope of the migration.
-3. [Apply any Exclusions](###Assignexclusiontemplatestoanewmigration) to reduce the scope within this Path.
+3. [Apply any exclusions](#add-new-exclusions) to reduce the scope within this Path.
 
-Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](##ViewingMigrations).
+Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](#view-migrations).
 
 ### View migrations
 
