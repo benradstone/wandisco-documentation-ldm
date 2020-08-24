@@ -12,19 +12,10 @@ WANdisco LiveData Migrator is a fully self-service data migration solution that 
 
 **Scalable:** able to accommodate data migration at any scale, without any risk of data loss.
 
-LiveData Migrator _migrates changing data_ at scale from HDFS to your choice of target environment. Targets include  [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), local file systems, and [S3](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html).
-
-<div style={{textAlign: 'center'}}>
-
-![LiveData Migration](/wandisco-documentation-ldm/img/migration.png)
-
-</div>
-
 ## Features
+LiveData Migrator _migrates changing data_ at scale from HDFS to your choice of target environment, including the ongoing changes made to those data before, throughout and after migration. Targets include  [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), local file systems, and [S3](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html).
 
-LiveData Migrator **migrates HDFS data** to other Hadoop-compatible file systems and cloud storage, including the ongoing changes made to those data before, throughout and after migration. Manage your migrations through a comprehensive and intuitive **command-line interface** or from the self-documenting **REST API**, track and **monitor migration progress**, and take advantage of optional management from WANdisco's **browser-based user interface** and deep integration with **cloud vendors' management interfaces**.
-
-The features of LiveData Migrator are designed to work together to provide migration capabilities for big data environments that are powerful, yet extremely easy to use. It combines:
+Manage your migrations through a **user interface**, a **command-line interface** or from the self-documenting **REST API**, track and **monitor migration progress**, and take advantage of optional management from WANdisco's **browser-based user interface** and deep integration with **cloud vendors' management interfaces**.
 
 - A robust and efficient scanner that visits source items only once to identify content for migration,
 - Integration with HDFS notifications that describe changes in source data while migration is  underway,
