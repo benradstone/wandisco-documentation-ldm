@@ -4,12 +4,16 @@ title: Quickstart
 sidebar_label: Quickstart
 ---
 
-:::note Public Preview
-LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.
-:::
+Want to try LiveData Migrator out and see how it works? Follow these steps to download, install LiveData Migrator and perform a simple migration.
 
-Get started with data migration in less than 30 seconds. If you're new to the concept of LiveData, or want to know what LiveData Migrator does, please read the [introduction to LiveData Migrator](./about.md).
+If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md).
 
+## Before you start
+You'll need a Red Hat or Debian operating system, a Java version of at least 1.8, and the following machine specifications:
+* (Minimum): 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB throughput.
+* (Recommended): 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput.
+
+## Download and install
 <div class="download">
 <a href="https://customer.wandisco.com">Download LiveData Migrator</a>
 </div>
@@ -109,4 +113,4 @@ Monitor the operation of LiveData Migrator, including the average bandwidth used
 
 # Getting Started
 
-For a more comprehensive introduction to using LiveData Migrator, including installation, operation and the full set of commands, please read the [Getting Started](./installation.md) guide.
+For a more comprehensive introduction to using LiveData Migrator, including full installation, please read the [Installation](./installation.md) guide.
