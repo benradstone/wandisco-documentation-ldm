@@ -1,7 +1,7 @@
 ---
 id: about
-title: About LiveData Migrator
-sidebar_label: About
+title: LiveData Migrator
+sidebar_label: About LiveData Migrator
 ---
 
 WANdisco LiveData Migrator is a fully self-service data migration solution that is immediate, live, and scalable.
