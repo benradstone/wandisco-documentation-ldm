@@ -81,6 +81,8 @@ To create a migration:
 
 Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](#view-migrations).
 
+If you've already migrated some data from the same source to the same target, you can choose whether to overwrite all the content (Overwrite) or only migrate new content that isn't already there (Skip).
+
 ### View migrations
 
 The Dashboard displays an overview of migrations and their status, showing what pre-existing data has been moved and data added since the migration started.
