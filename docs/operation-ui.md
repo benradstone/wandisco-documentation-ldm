@@ -79,7 +79,9 @@ To create a migration:
 2. Choose the Path to set the scope of the migration.
 3. [Apply any exclusions](#add-new-exclusions) to reduce the scope within this Path.
 
-Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](#view-migrations). If you've already migrated some data from the same source to the same target, you can choose whether to overwrite all the content (Overwrite) or only migrate new content that isn't already there (Skip).
+Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](#view-migrations).
+
+If you've already migrated some data from the same source to the same target, you can choose whether to overwrite all the content (Overwrite) or only migrate new content that isn't already there (Skip).
 
 ### View migrations
 
