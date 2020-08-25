@@ -34,11 +34,12 @@ You'll need a Red Hat or Debian operating system, a Java version of at least 1.8
     ```
     /etc/init.d/one-ui-server status
     ```
-1. [Register your account](./operation-ui.md#register)
+1. [Connect to the UI using port 8081](./operation-ui.md#before-you-start).
+1. [Register your LiveData Migrator account](./operation-ui.md#register).
 
 ## Step 2 - Define a source and a target
 You'll need a source and at least one target to migrate data.
-1. Click the pulsing + button to add a source.
+1. In the UI Storage panel, click the pulsing + button to add a source.
 1. Once added, repeat the process to add a target.
 
 See the [Configure storage](./operation-ui.md#configure-storage) guide for more details.
