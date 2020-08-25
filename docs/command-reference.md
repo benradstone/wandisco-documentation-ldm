@@ -452,7 +452,7 @@ OPTIONS
 
         --credentials-provider  string
 
-                [Mandatory]
+                [Optional, default = <none>]
 
         --properties-files  list
                 Load properties from these files
@@ -470,7 +470,7 @@ OPTIONS
 * **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint, e.g. `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`.
   Providers available include:
   * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
-    
+
     Use this provider to offer credentials as an access key and secret access key with the `--access-key` and `--secret-key` Parameters.
 
   * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
