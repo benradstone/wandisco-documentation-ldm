@@ -10,6 +10,10 @@ Find details here for the configuration properties that you can use when running
 
 Each configuration property can also be provided to LiveData Migrator as a command-line argument when launched, e.g. `--server.port=19999`.
 
+:::note
+You'll need to perform a restart after making any configuration changes to LiveData Migrator or the UI. To do this, run `service livedata-migrator restart` or `service one-ui-server restart` as appropriate.
+:::
+
 ## LiveData Migrator Configuration
 
 An example `application.properties` file:
