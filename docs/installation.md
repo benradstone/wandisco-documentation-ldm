@@ -4,7 +4,7 @@ title: Installation
 sidebar_label: Installation
 ---
 
-This guide teaches you how to obtain and install LiveData Migrator.
+This guide teaches you how to download and install LiveData Migrator.
 
 If you are new to the concepts of LiveData Migrator and what it does, we recommend you read through the [About](./about.md) section before learning how to install and use the product.
 
@@ -111,6 +111,15 @@ When LiveData Migrator is installed as a [system service](#option-2-system-servi
 | `/etc/wandisco/livedata-migrator` | Configuration files |
 | `/opt/wandisco/livedata-migrator` | Java archive files |
 | `/opt/wandisco/livedata-migrator/db` | LiveData Migrator runtime state |
+
+The following UI directories are used:
+
+| Location | Content |
+|---|---|
+| `/var/log/wandisco/ui` | Logs |
+| `/etc/wandisco/ui` | Configuration files |
+| `/opt/wandisco/ui` | Java archive files |
+| `/var/run/wandisco/ui` | LiveData Migrator runtime state |
 
 ### System service commands
 
