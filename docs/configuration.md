@@ -4,10 +4,6 @@ title: Configuration
 sidebar_label: Configuration
 ---
 
-:::note Public Preview
-LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.
-:::
-
 Find details here for the configuration properties that you can use when running LiveData Migrator as a system service. Properties are defined in the following files:
 * LiveData Migrator `/etc/wandisco/livedata-migrator/application.properties`
 * UI `/etc/wandisco/ui/application-prod.properties`
@@ -206,4 +202,3 @@ Configure how the UI uses SSL, which is disabled by default.
 | `server.ssl.key-store-password` | The password to be used to access the key store |
 | `server.ssl.key-alias` | The alias of the certificate to be used |
 | `server.ssl.key-store-type` | Optional: set the key store type. Defaults to `PKCS12` |
-
