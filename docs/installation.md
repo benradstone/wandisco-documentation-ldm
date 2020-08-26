@@ -119,7 +119,7 @@ The following UI directories are used:
 | `/var/log/wandisco/ui` | Logs |
 | `/etc/wandisco/ui` | Configuration files |
 | `/opt/wandisco/ui` | Java archive files |
-| `/var/run/wandisco/ui` | LiveData Migrator runtime state |
+| `/var/run/wandisco/ui` | UI runtime state |
 
 ### System service commands
 
