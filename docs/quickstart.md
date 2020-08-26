@@ -4,109 +4,59 @@ title: Quickstart
 sidebar_label: Quickstart
 ---
 
-:::note Public Preview
-LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.
-:::
+Want to try LiveData Migrator out and see how it works? Follow these three steps to download and install LiveData Migrator, and perform a data migration.
 
-Get started with data migration in less than 30 seconds. If you're new to the concept of LiveData, or want to know what LiveData Migrator does, please read the [introduction to LiveData Migrator](./about.md).
+If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md).
 
+## Before you start
+You'll need a Red Hat/CentOS or Debian operating system, a Java version of at least 1.8, and the following machine specifications:
+* (Minimum): 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB throughput.
+* (Recommended): 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput.
+
+If you're migrating data from an Hadoop cluster, install LiveData Migrator on an edge node.
+
+[See a full list of technical prerequisites.](./installation.md#prerequisites)
+
+## Step 1 - Download and install
 <div class="download">
 <a href="https://customer.wandisco.com">Download LiveData Migrator</a>
 </div>
 
-Migrate your data immediately in three steps:
-1. Run LiveData Migrator,
-1. Define a target, then
-1. Migrate your data.
+1. Install LiveData Migrator by running this command:
 
-## 1. Run LiveData Migrator
+    ```bash title="Red Hat/CentOS"
+    chmod +x one-ui_lm_rpm_installer.sh && ./one-ui_lm_rpm_installer.sh
+    ```
 
-As the `hdfs` user on a cluster edge node:
+    ```bash title="Debian"
+    chmod +x one-ui_lm_deb_installer.sh && ./one-ui_lm_deb_installer.sh
+    ```
 
-```
-$ hadoop jar live-migrator.jar
-```
+2. Check the service statuses by running these commands:
 
-For more details, see the [Getting Started](./installation.md#running-livedata-migrator) guide.
+    ```
+    service livedata-migrator status
+    ```
 
-## 2. Define your target
+    ```
+    service one-ui-server status
+    ```
 
-Define a reference to your target file system with [`filesystem add`](./command-reference.md#file-system-commands) before migrating data to it. e.g.
+1. Connect to the UI with your web browser on [port 8081](./operation-ui.md#before-you-start) and register your LiveData Migrator account.
 
-```
-WANdisco LiveMigrator >> filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name psmadls2 --container.name lm2target --fs.azure.shared.key Ri5NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31ejVpUVA==
-{
-  "fsId" : "lm2target",
-  "fsType" : "adls2-hcfs",
-  "isSource" : false,
-  "properties" : {
-    "fsId" : "lm2target",
-    "fsType" : "adls2-hcfs",
-    "fs.defaultFS" : "abfss://lm2target@psmadls2.dfs.core.windows.net/",
-    "fs.azure.account.auth.type.psmadls2.dfs.core.windows.net" : "SharedKey",
-    "fs.azure.account.key.psmadls2.dfs.core.windows.net" : "Ri5NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31ejVpUVA==",
-    "fs.abfss.impl" : "org.apache.hadoop.fs.azurebfs.SecureAzureBlobFileSystem",
-    "fs.AbstractFileSystem.abfss.impl" : "org.apache.hadoop.fs.azurebfs.Abfss",
-    "fs.abfss.impl.disable.cache" : "true"
-  },
-  "eventsPosition" : 0
-}
-```
+## Step 2 - Define a source and a target
+You'll need a source and at least one target to migrate data. You might find LiveData Migrator has discovered your source storage already.
+1. If your source storage isn't already defined, click the pulsing + button to add a source.
+1. Once added, repeat the process to add a target.
 
-## 3. Migrate your data
+See the [Configure storage](./operation-ui.md#configure-storage) guide for more details.
 
-Create and auto-start the migration for a directory in your source, like `/repl1`, to the target you created with the identifier `lm2target` using [`migration new`](./command-reference.md#migration-new). You must also provide an identifier for the migration, such as `myNewMigration`.
+## Step 3 - Migrate your data
+1. Choose a source and target from previously defined [storages](./operation-ui.md#configure-storage).
+2. Choose the Path to set the scope of the migration.
+3. [Apply any exclusions](./operation-ui.md#add-new-exclusions) to reduce the scope within this Path.
 
-_Example_
+See the [Create migrations](./operation-ui.md#create-migrations) guide for more details.
 
-```
-WANdisco LiveMigrator >> migration new --auto-start --path /repl1 --target lm2target –-migrationId myNewMigration
-{
-  "migrationId" : "343a270e319d5beb0bf1adfbb1a5d0f8f3c0a4d6",
-  "path" : "/repl1",
-  "source" : "auto-discovered-source-hdfs",
-  "target" : "lm2target",
-  "state" : "SCHEDULED",
-  "exclusions" : [ ],
-  "migrationStartTime" : "2020-06-03T05:17:27.936+0000",
-  "migrationEdge" : "/repl1",
-  "scannerSummary" : {
-    "progressSummary" : {
-      "filesScanned" : 0,
-      "directoriesScanned" : 0,
-      "bytesScanned" : 0
-    },
-    "contentSummary" : null
-  },
-  "migrationCompleteTime" : null,
-  "abortReason" : null,
-  "filesSeen" : 0,
-  "dirsSeen" : 0,
-  "sizeOfMigration" : 0
-}
-```
-
-Use [`status`](./command-reference.md#status) for information about the progress of migrations that are underway, as well as those that are Live, meaning that they have migrated all pre-existing data and are keeping the target file system consistent with new data and other changes made to the source.
-
-```
-WANdisco LiveMigrator >> status
-
-Total Migrations:  1
-Average Bandwidth: 0.00 Gb/s, 0.00 Gb/s, 0.00 Gb/s
-Peak Bandwidth:    0.00 Gb/s
-Average Files/s:   0, 0, 0
-Peak Files/s:      0
-
-Live: 1
-     /repl1 343a270e319d5beb0bf1adfbb1a5d0f8f3c0a4d6
-
-Running: 0
-
-Ready: 0
-```
-
-Monitor the operation of LiveData Migrator, including the average bandwidth used in the last 10 second, 1 minute, and 5 minute intervals. If you need more specific information about an individual migration, you can view details for it with [`migration show`](./command-reference.md#migration-show).
-
-# Getting Started
-
-For a more comprehensive introduction to using LiveData Migrator, including installation, operation and the full set of commands, please read the [Getting Started](./installation.md) guide.
+## Get started
+For a more comprehensive guide to getting up and running with LiveData Migrator, including full installation, see the [Installation](./installation.md) guide.
