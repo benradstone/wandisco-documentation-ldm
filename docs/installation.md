@@ -4,9 +4,9 @@ title: Installation
 sidebar_label: Installation
 ---
 
-This guide teaches you how to download and install LiveData Migrator.
+Ready to perform a full installation? Check the prerequisites and then follow these steps to download and install LiveData Migrator.
 
-If you are new to the concepts of LiveData Migrator and what it does, we recommend you read through the [About](./about.md) section before learning how to install and use the product.
+If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md).
 
 ## Prerequisites
 
