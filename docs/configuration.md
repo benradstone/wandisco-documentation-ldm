@@ -102,6 +102,8 @@ lm.kerberos.principal=
 lm.kerberos.keytab.location=
 
 license.key.location=/opt/wandisco/livedata-migrator/
+log.dir=./logs
+threaddump.directory=${log.dir}/threads
 
 # HTTP traffic logging config
 logging.level.org.zalando.logbook=TRACE
