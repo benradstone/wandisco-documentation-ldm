@@ -44,6 +44,12 @@ OPTIONS
 * **`--file-system-id`** The identifier of the source file system resource to delete.
   * UI: **Storage Name**
 
+#### Example
+
+```text
+source del --file-system-id mysource
+```
+
 ----
 ### `source fs show`
 
@@ -62,27 +68,12 @@ OPTIONS
 
 * **`--verbose`** Include all configuration properties for the source file system in the response.
 
-#### Examples
-
-```
-WANdisco LiveMigrator >> source fs show
-[ {
-  "fsId" : "auto-discovered-source-hdfs",
-  "fsType" : "hdfs",
-  "isSource" : true,
-  "properties" : {
-    "fs.defaultFS" : "hdfs://myhost.localdomain:8020"
-  },
-  "eventsPosition" : 0
-} ]
-```
-
 ## File System Commands
 
 ----
 ### `filesystem add adls2 sharedKey`
 
-Add an Azure Data Lake Storage Gen 2 container as a migration target using the `filesystem add adls2-hcfs sharedKey` command, which requires credentials in the form of an account key.
+Add an Azure Data Lake Storage Gen 2 container as a migration target using the `filesystem add adls2 sharedKey` command, which requires credentials in the form of an account key.
 
 ```text title="Add an ADLS Gen 2 file system"
 SYNOPSYS
@@ -141,26 +132,10 @@ OPTIONS
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
-#### Examples
+#### Example
 
-```
-WANdisco LiveMigrator >> filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name psmadls2 --container.name lm2target --fs.azure.shared.key Ri5NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31ejVpUVA==
-{
-  "fsId" : "lm2target",
-  "fsType" : "adls2-hcfs",
-  "isSource" : false,
-  "properties" : {
-    "fsId" : "lm2target",
-    "fsType" : "adls2-hcfs",
-    "fs.defaultFS" : "abfss://lm2target@psmadls2.dfs.core.windows.net/",
-    "fs.azure.account.auth.type.psmadls2.dfs.core.windows.net" : "SharedKey",
-    "fs.azure.account.key.psmadls2.dfs.core.windows.net" : "Ri5NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31ejVpUVA==",
-    "fs.abfss.impl" : "org.apache.hadoop.fs.azurebfs.SecureAzureBlobFileSystem",
-    "fs.AbstractFileSystem.abfss.impl" : "org.apache.hadoop.fs.azurebfs.Abfss",
-    "fs.abfss.impl.disable.cache" : "true"
-  },
-  "eventsPosition" : 0
-}
+```text
+filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --fs.azure.shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31eIopUVA==
 ```
 
 ----
@@ -222,6 +197,12 @@ OPTIONS
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
+#### Example
+
+```text
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice
+```
+
 ----
 ### `filesystem add local`
 
@@ -268,6 +249,12 @@ OPTIONS
   * UI: Defined when choosing the **Add Source** option.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
+
+#### Example
+
+```text
+filesystem add local --file-system-id mytarget --fs-root /storage/migration/
+```
 
 ----
 ### `filesystem add s3a`
@@ -320,7 +307,7 @@ OPTIONS
   * UI: **Storage Name**
 * **`--bucket-name`** The name of your S3 bucket.
   * UI: **Bucket Name**
-* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint, e.g. `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`.
+* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint.  
   Providers available include:
   * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
 
@@ -349,6 +336,12 @@ OPTIONS
   * UI: **Secret Key**
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
+
+#### Example
+
+```text
+filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
+```
 
 ----
 ### `filesystem clear`
@@ -383,6 +376,12 @@ OPTIONS
 * **`--file-system-id`** The identifier of the file system resource to delete.
   * UI: **Storage Name**
 
+#### Example
+
+```text
+filesystem del --file-system-id mytarget
+```
+
 ----
 ### `filesystem list`
 
@@ -400,24 +399,6 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--verbose`** Include all properties for each file system in the JSON result.
-
-#### Examples
-
-```
-WANdisco LiveMigrator >> filesystem list
-[ {
-  "fsId" : "mytarget",
-  "fsType" : "adls2",
-  "isSource" : false,
-  "properties" : {
-    "fs.container.name" : "lm2target",
-    "fs.auth.type" : "SharedKey",
-    "fs.account.name" : "psmadls2",
-    "fs.scheme" : "abfss"
-  },
-  "eventsPosition" : 0
-} ]
-```
 
 ----
 ### `filesystem show`
@@ -442,22 +423,10 @@ OPTIONS
 * **`--file-system-id`** The identifier of the file system resource to show.
   * UI: **Storage Name**
 
-#### Examples
+#### Example
 
 ```
-WANdisco LiveMigrator >> filesystem show --file-system-id mytarget
-{
-  "fsId" : "mytarget",
-  "fsType" : "adls2",
-  "isSource" : false,
-  "properties" : {
-    "fs.container.name" : "lm2target",
-    "fs.auth.type" : "SharedKey",
-    "fs.account.name" : "psmadls2",
-    "fs.scheme" : "abfss"
-  },
-  "eventsPosition" : 0
-}
+filesystem show --file-system-id mytarget
 ```
 
 ----
@@ -468,38 +437,6 @@ View information about the file system types available for use with LiveData Mig
 ```text title="List the types of target file systems available"
 SYNOPSYS
         filesystem types
-```
-
-#### Examples
-
-```
-WANdisco LiveMigrator >> filesystem types
-[ {
-  "eventListenerType" : "no-op",
-  "fs" : "adls1",
-  "fsDescription" : "ADLS Filesystem via the Hadoop HCFS API",
-  "sourceCapable" : false
-}, {
-  "eventListenerType" : "no-op",
-  "fs" : "adls2",
-  "fsDescription" : "ADLS2 Filesystem via the Hadoop HCFS API",
-  "sourceCapable" : false
-}, {
-  "eventListenerType" : "no-op",
-  "fs" : "local",
-  "fsDescription" : "Hadoop HCFS Wrapper for Local Storage",
-  "sourceCapable" : false
-}, {
-  "eventListenerType" : "inotify",
-  "fs" : "hdfs",
-  "fsDescription" : "Hadoop HDFS Filesystem",
-  "sourceCapable" : true
-}, {
-  "eventListenerType" : "no-op",
-  "fs" : "s3a",
-  "fsDescription" : "S3A Filesystem via the Hadoop HCFS API",
-  "sourceCapable" : false
-} ]
 ```
 
 ## Migration Commands
@@ -523,10 +460,10 @@ OPTIONS
 
 * **`--migration-id`** The identifier of the migration to stop.
 
-#### Examples
+#### Example
 
-```
-WANdisco LiveMigrator >> migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
+```text
+migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
 ```
 
 ----
@@ -547,6 +484,12 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--migration-id`** The identifier of the migration to delete.
+
+#### Example
+
+```text
+migration del --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
+```
 
 ----
 ### `migration exclusion add`
@@ -573,6 +516,12 @@ OPTIONS
 * **`--migration-id`** The identifier of the migration with which to associate the exclusion.
 * **`--exclusion-id`** The identifier of the exclusion to associate with the migration.
 
+#### Example
+
+```text
+migration exclusion add --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e --exclusion-id myexclusion1
+```
+
 ----
 ### `migration exclusion del`
 
@@ -598,6 +547,12 @@ OPTIONS
 * **`--migration-id`** The identifier of the migration from which to remove the exclusion.
 * **`--exclusion-id`** The identifier of the exclusion to remove from the migration.
 
+#### Example
+
+```text
+migration exclusion del --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e --exclusion-id myexclusion1
+```
+
 ----
 ### `migration list`
 
@@ -606,35 +561,6 @@ Present the list of all migrations defined.
 ```text title="List running and active migrations"
 SYNOPSYS
         migration list
-```
-
-#### Examples
-
-```text
-WANdisco LiveMigrator >> migration list
-[ {
-  "migrationId" : "myNewMigration",
-  "path" : "/repl1",
-  "source" : "auto-discovered-source-hdfs",
-  "target" : "mytarget",
-  "state" : "NONSCHEDULED",
-  "exclusions" : [ ],
-  "migrationStartTime" : "2020-06-05T04:28:12.835+0000",
-  "migrationEdge" : "/repl1",
-  "scannerSummary" : {
-    "progressSummary" : {
-      "filesScanned" : 0,
-      "directoriesScanned" : 0,
-      "bytesScanned" : 0
-    },
-    "contentSummary" : null
-  },
-  "migrationCompleteTime" : null,
-  "abortReason" : null,
-  "filesSeen" : 0,
-  "dirsSeen" : 0,
-  "sizeOfMigration" : 0
-} ]
 ```
 
 ----
@@ -646,7 +572,7 @@ Create a new migration to initiate data migration from your source file system.
 SYNOPSYS
         migration new [--path] string
                       [--target] string
-                      [--migrationId] string
+                      [--migration-id] string
                       [--exclusions] string
                       [--auto-start]
 
@@ -659,7 +585,7 @@ OPTIONS
 
                 [Mandatory]
 
-        –-migrationId  string
+        –-migration-id  string
 
                 [Mandatory]
 
@@ -678,7 +604,7 @@ OPTIONS
 
 * **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target.
 * **`--target`** Specifies the name of the target file system resource to which migration will occur.
-* **`--migrationId`** Provide an identifier for the new migration.
+* **`--migration-id`** Provide an identifier for the new migration.
 
 #### Optional Parameters
 
@@ -691,39 +617,10 @@ OPTIONS
   1. **`com.wandisco.livemigrator2.migration.SkipIfSizeMatchActionPolicy`**  
      If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
 
-#### Examples
+#### Example
 
 ```
-WANdisco LiveMigrator >> migration new --exclusions 100mbfiles --path /repl1 --target mytarget –-migrationId myNewMigration
-{
-  "migrationId" : "myNewMigration",
-  "path" : "/repl1",
-  "source" : "auto-discovered-source-hdfs",
-  "target" : "mytarget",
-  "state" : "NONSCHEDULED",
-  "exclusions" : [ {
-    "type" : "FileSizeExclusion",
-    "id" : "100mbfiles",
-    "description" : "Files greater than 100 MB",
-    "maxBytes" : 104857600,
-    "maxBytesFormatted" : "100 MB"
-  } ],
-  "migrationStartTime" : "2020-06-05T04:35:01.690+0000",
-  "migrationEdge" : "/repl1",
-  "scannerSummary" : {
-    "progressSummary" : {
-      "filesScanned" : 0,
-      "directoriesScanned" : 0,
-      "bytesScanned" : 0
-    },
-    "contentSummary" : null
-  },
-  "migrationCompleteTime" : null,
-  "abortReason" : null,
-  "filesSeen" : 0,
-  "dirsSeen" : 0,
-  "sizeOfMigration" : 0
-}
+migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
 ```
 
 ----
@@ -744,6 +641,12 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--migration-id`** The identifier of the migration to run.
+
+#### Example
+
+```
+migration run –-migration-id myNewMigration
+```
 
 ----
 ### `migration show`
@@ -767,39 +670,10 @@ OPTIONS
 
 * **`--migration-id`** The identifier of the migration to show.
 
-#### Examples
+#### Example
 
 ```
-WANdisco LiveMigrator >> migration show --migration-id myNewMigration
-{
-  "migrationId" : "myNewMigration",
-  "path" : "/repl1",
-  "source" : "auto-discovered-source-hdfs",
-  "target" : "mytarget",
-  "state" : "NONSCHEDULED",
-  "exclusions" : [ {
-    "type" : "FileSizeExclusion",
-    "id" : "100mbfiles",
-    "description" : "Files greater than 100 MB",
-    "maxBytes" : 104857600,
-    "maxBytesFormatted" : "100 MB"
-  } ],
-  "migrationStartTime" : "2020-06-05T04:35:01.690+0000",
-  "migrationEdge" : "/repl1",
-  "scannerSummary" : {
-    "progressSummary" : {
-      "filesScanned" : 0,
-      "directoriesScanned" : 0,
-      "bytesScanned" : 0
-    },
-    "contentSummary" : null
-  },
-  "migrationCompleteTime" : null,
-  "abortReason" : null,
-  "filesSeen" : 0,
-  "dirsSeen" : 0,
-  "sizeOfMigration" : 0
-}
+migration show --migration-id myNewMigration
 ```
 
 ----
@@ -827,7 +701,7 @@ SYNOPSYS
 #### Examples
 
 ```
-WANdisco LiveMigrator >> status
+status
 
 Total Migrations:  1
 Average Bandwidth: 0.00 Gb/s, 0.00 Gb/s, 0.00 Gb/s
@@ -882,17 +756,10 @@ OPTIONS
 * **`--value`** The numerical value for the file size, in a unit defined by.
 * **`--unit`** A string to define the unit used, either `B` for bytes, `GB` for gibibytes, `KB` for kibibytes, `MB` for mebibytes, `PB` for pebibytes, or `TB` for tebibytes.
 
-#### Examples
+#### Example
 
 ```
-WANdisco LiveMigrator >> exclusion add file-size --description "Files greater than 100 MB" --id 100mbfiles --unit MB --value 100
-{
-  "type" : "FileSizeExclusion",
-  "id" : "100mbfiles",
-  "description" : "Files greater than 100 MB",
-  "maxBytes" : 104857600,
-  "maxBytesFormatted" : "100 MB"
-}
+exclusion add file-size --id 100mbfiles --description "Files greater than 100 MB" --value 100 --unit MB
 ```
 
 ----
@@ -926,17 +793,10 @@ OPTIONS
 * **`--description`** A user-friendly description for the policy.
 * **`--regex`** A regular expression in a syntax similar to that used by Perl.
 
-#### Examples
+#### Example
 
 ```
-WANdisco LiveData Migrator >> exclusion add regex --description "No paths that start with test"  --id exclusion1 --regex ^test\.*
-{
-  "type" : "RegexExclusion",
-  "id" : "exclusion1",
-  "description" : "No paths that start with test",
-  "fsRestriction" : false,
-  "regex" : "^test.*"
-}
+exclusion add regex --description "No paths that start with test"  --id exclusion1 --regex ^test\.*
 ```
 
 #### Using backslash characters within `--regex` parameter
@@ -944,17 +804,10 @@ WANdisco LiveData Migrator >> exclusion add regex --description "No paths that s
 If you wish to use a `\` character as part of your regex value, you must escape this character with an additional backslash.
 
 ```text title="Example"
-WANdisco LiveData Migrator >> exclusion add regex --description "No paths that start with a backslash followed by test"  --id exclusion2 --regex ^\\test\.*
-{
-  "type" : "RegexExclusionDTO",
-  "id" : "exclusion2",
-  "description" : "No paths that start with a backslash followed by test",
-  "fsRestriction" : false,
-  "regex" : "^\\test.*"
-}
+exclusion add regex --description "No paths that start with a backslash followed by test"  --id exclusion2 --regex ^\\test\.*
 ```
 
-The response displayed if running through the CLI (as shown in the example above) will **not** hide the additional backslash. However, the internal representation will be as expected within LiveData Migrator (it will read as `^\test.*`).
+The response displayed if running through the CLI will **not** hide the additional backslash. However, the internal representation will be as expected within LiveData Migrator (it will read as `^\test.*`).
 
 This workaround is not required for API inputs, as it only affects the [Spring Shell](https://docs.spring.io/spring-shell/docs/current-SNAPSHOT/reference/htmlsingle/#quotes-handling) implementation used for the CLI.
 
@@ -980,6 +833,12 @@ OPTIONS
 
 * **`--id`** The identifier for the exclusion policy to delete.
 
+#### Example
+
+```
+exclusion del --id exclusion1
+```
+
 ----
 ### `exclusion list`
 
@@ -991,25 +850,6 @@ NAME
 
 SYNOPSYS
         exclusion list
-```
-
-#### Examples
-
-```
-WANdisco LiveMigrator >> exclusion list
-[ {
-  "type" : "FileSizeExclusion",
-  "id" : "10bytes",
-  "description" : "Greater than 10 bytes",
-  "maxBytes" : 10,
-  "maxBytesFormatted" : "10 B"
-}, {
-  "type" : "FileSizeExclusion",
-  "id" : "100mbfiles",
-  "description" : "Files greater than 100 MB",
-  "maxBytes" : 104857600,
-  "maxBytesFormatted" : "100 MB"
-} ]
 ```
 
 ----
@@ -1031,17 +871,10 @@ OPTIONS
 
 * **`--id`** The identifier for the exclusion policy to show.
 
-#### Examples
+#### Example
 
 ```
-WANdisco LiveMigrator >> exclusion show --id 100mbfiles
-{
-  "type" : "FileSizeExclusion",
-  "id" : "100mbfiles",
-  "description" : "Files greater than 100 MB",
-  "maxBytes" : 104857600,
-  "maxBytesFormatted" : "100 MB"
-}
+exclusion show --id 100mbfiles
 ```
 
 ## Built-in Commands
@@ -1089,20 +922,20 @@ OPTIONS
 ```
 
 #### Optional Parameters
+
 * **`--command`**, **`-C`** The command for which help information is wanted
 
-#### Examples
+#### Example
 
 ```text
-WANdisco LiveMigrator >> help
+help
 AVAILABLE COMMANDS
 
 Built-In Commands
         clear: Clear the shell screen.
         exit, quit: Exit the shell.
         help: Display help about available commands.
-        history: Display or save the history of previously run commands.
-        postprocessors: Display the available post processors
+        history: Display or save the history of previously run commands
         script: Read and execute commands from a file.
         stacktrace: Display the full stacktrace of the last error.
 
@@ -1114,18 +947,18 @@ Exclusion Commands
         exclusion show: Get details for a particular exclusion rule.
 
 Filesystem Commands
-        filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key.
-        filesystem add hdfs: Add an Hadoop HDFS FileSystem.
-        filesystem add local: Add an Local FileSystem via HCFS FileSystem.
+        filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key
+        filesystem add gcs: Add a Google Cloud Storage FileSystem
+        filesystem add hdfs: Add an Hadoop HDFS FileSystem
+        filesystem add local: Add an Local FileSystem via HCFS FileSystem
         filesystem add s3a: Add an S3A via HCFS API FileSystem.
         filesystem clear: Delete all targets.
         filesystem del: Delete a target.
         filesystem list: List of targets.
         filesystem show: Get target details.
-        filesystem types: List the types of target Filesystems available.
+        filesystem types: List the types of target Filesystems available
 
 Migration Commands
-        migration stop: Abort a migration.
         migration del: Delete a migration.
         migration exclusion add: Add an exclusion to a migration.
         migration exclusion del: Remove an exclusion from a migration.
@@ -1133,19 +966,20 @@ Migration Commands
       * migration new: Create a new migration.
         migration run: Start or resume a migration.
         migration show: Get migration details.
+        migration stop: Abort a migration.
         status: Get migration status.
 
 Source Commands
         source clear: Delete all sources.
         source del: Delete a source.
-        source fs show: Show the source FileSystem Configuration.
+        source fs show: Show the source FileSystem Configuration
 
 Commands marked with (*) are currently unavailable.
 Type `help <command>` to learn more.
 ```
 
 ```text
-WANdisco LiveMigrator >> help migration\ list
+help migration\ list
 
 NAME
         migration list - List running and active migrations.
