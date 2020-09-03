@@ -202,10 +202,14 @@ OPTIONS
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
-#### Example
+#### Examples
 
 ```text
-filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://myhost.localdomain:8020
+```
+
+```text
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
 ```
 
 ----
