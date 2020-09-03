@@ -41,17 +41,17 @@ Configure the LiveData Migrator service to use authorized SSH keys instead of a 
 1. Restart the LiveData Migrator service afterwards:  
    `service livedata-migrator restart`
 
-## How LiveData Migrator CLI works
+## How the LiveData Migrator CLI works
 
-Manage four different resource types when using LiveData Migrator in the CLI.
+Define the following resources using LiveData Migrator in the CLI to start migrating data:
 
-**Source**: Manage your source file system.
+1. **Source**: Manage your source file system.
 
-**Filesystem**: Create and manage file systems (storages) and define them as the source or target of migrations.
+1. **Filesystem**: Create and manage file systems (storages) and define them as the source or target of migrations.
 
-**Exclusion**: Constrain the content migrated by creating and referencing exclusions during a migration. Exclusion constrain content by file size or by a regular expression match against a file name.
+1. **Exclusion**: Constrain the content migrated by creating and referencing exclusions during a migration. Exclusion constrain content by file size or by a regular expression match against a file name.
 
-**Migration**: A migration references the source and target file systems. Specify the source file system directory path for content to be migrated from, and include any exclusions as needed.
+1. **Migration**: A migration references the source and target file systems. Specify the source file system directory path for content to be migrated from, and include any exclusions as needed.
 
 You can find a summary of the commands used for each resource type here. Each command links to the [LiveData Migrator Command Reference](./command-reference.md) page with more details on mandatory and optional parameters (including examples).
 
@@ -63,9 +63,9 @@ Type the `<tab>` key if you are uncertain whether a command requires an addition
 
 ## Migrate data
 
-### 1. Validate Source
+### Validate Source
 
-LiveData Migrator migrates data from a source file system. Validate that the correct source file system is registered or delete the existing one and define a new source in the next step.
+LiveData Migrator migrates data from a source file system. Validate that the correct source file system is registered or delete the existing one (define a new source in the [Add File Systems](#add-file-systems) step).
 
 :::info
 The source file system is normally detected on startup. It will not be detected automatically if your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
@@ -79,7 +79,7 @@ You can manage the source file system through these commands.
 | [`source del`](./command-reference.md#source-del) | Delete a source |
 | [`source fs show`](./command-reference.md#source-fs-show) | Show the source FileSystem configuration |
 
-### 2. Add File Systems
+### Add File Systems
 
 Add file systems to provide LiveData Migrator with the information needed to read content from your source and migrate content to your target.
 
@@ -105,7 +105,7 @@ You can define multiple target file systems, which you can migrate to at the sam
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
-### 3. Define Exclusions
+### Define Exclusions
 
 Define exclusions to constrain the content migrated from a source file system.
 
@@ -121,7 +121,7 @@ Exclusions need to be associated with migrations. You can do this when you creat
 
 Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions. Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
 
-### 4. Create and manage Migrations
+### Create and manage Migrations
 
 Create migration resources to define and initiate data migration.
 
