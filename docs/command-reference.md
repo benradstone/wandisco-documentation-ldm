@@ -202,10 +202,14 @@ OPTIONS
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
-#### Example
+#### Examples
 
 ```text
-filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://myhost.localdomain:8020
+```
+
+```text
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
 ```
 
 ----
@@ -1069,3 +1073,17 @@ OPTIONS
 SYNOPSYS
         stacktrace
 ```
+
+## Action Prompt Features
+
+The action prompt provides many features to guide you during operation.
+
+| Feature | How to use it |
+|---|---|
+| **Review available commands** | Commands that cannot be used without creating other resources first are tagged with `*` in the output of the `help` command. |
+| **Command completion** | Hit the `<tab>` key at any time to get assistance or to complete partially-entered commands. |
+| **Cancel input** | Type `<Ctrl-C>` before entering a command to return to an empty action prompt. |
+| **Syntax indication** | Invalid commands are highlighted as you type. |
+| **Clear the display** | Type `<Ctrl-L>` at any time. |
+| **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
+| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
