@@ -1151,3 +1151,17 @@ The action prompt provides many features to guide you during operation.
 | **Clear the display** | Type `<Ctrl-L>` at any time. |
 | **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
 | **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
+
+### System service commands
+
+#### LiveData Migrator
+
+The LiveData Migrator service script can be used to control operation of the service at any time:
+
+`service livedata-migrator start|stop|force-reload|restart|status`
+
+## UI
+
+The UI service script can be used to control operation of the service at any time:
+
+`service one-ui-server start|stop|force-reload|restart|status`
