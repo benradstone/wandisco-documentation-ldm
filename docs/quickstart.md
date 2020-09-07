@@ -4,19 +4,6 @@ title: Quickstart
 sidebar_label: Quickstart
 ---
 
-Want to try LiveData Migrator out and see how it works? Follow these three steps to download and install LiveData Migrator, and perform a data migration.
-
-If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md).
-
-## Before you start
-You'll need a Red Hat/CentOS or Debian operating system, a Java version of at least 1.8, and the following machine specifications:
-* (Minimum): 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB throughput.
-* (Recommended): 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput.
-
-If you're migrating data from an Hadoop cluster, install LiveData Migrator on an edge node.
-
-[See a full list of technical prerequisites.](./installation.md#prerequisites)
-
 ## Step 1 - Download and install
 <div class="download">
 <a href="https://customer.wandisco.com">Download LiveData Migrator</a>

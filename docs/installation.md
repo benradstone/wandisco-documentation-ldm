@@ -4,13 +4,11 @@ title: Installation
 sidebar_label: Installation
 ---
 
-Ready to perform a full installation? Check the prerequisites and then follow these three steps to get up and running with LiveData Migrator.
+Ready to install? Check the prerequisites and then follow these steps to get up and running with LiveData Migrator.
 
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md).
 
 ## Before you start
-
-You'll need a the following prerequisites, machine specification and a license to install and use LiveData Migrator.
 
 ### Prerequisites
 
@@ -25,52 +23,35 @@ You'll need a the following prerequisites, machine specification and a license t
 
 ### Machine specification
 
-* Minimum host specification = **4 CPUs, 16 GB RAM**
-  * Recommended = **16 CPUs, 32 GB RAM**
-* Minimum available storage = **100 GB**
-  * Recommended = **200 GB** (SSD-backed volumes)
-* Minimum network throughput = **2 Gbps**
-  * Your network bandwidth will need to sufficiently accommodate the transfer of existing data and ongoing changes from your source storage.
-* If migrating from HDFS, we recommend the LiveData Migrator is installed on an edge node in the Hadoop cluster.
+* **16 CPUs, 32 GB RAM** (minimum **4 CPUs, 16 GB RAM**)
+* **200 GB** (SSD-backed volumes) (minimum **100 GB**)
+* **2 Gbps** minimum network. Your network bandwidth must be able to cope with transferring data and ongoing changes from your source storage.
 
 ### License
 
-Upload your license key to access the customer download page.
+The LiveData Migrator preview license is limited to 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator, but operation will stop after reaching either of these limits. [Contact WANdisco](https://www.wandisco.com) to upgrade to a full license.
 
-The LiveData Migrator preview license is limited to 14 days operation and 5TB of data migration. You have full functionality available, but operation will cease immediately after reaching either of these limits.
+## Download and install LiveData Migrator
 
-[Contact WANdisco](https://www.wandisco.com) for a license that will meet your migration needs.
+1. Upload your license key to access the customer download page.
 
-## Step 1 - Download LiveData Migrator
-
-Download LiveData Migrator from the WANdisco Customer Portal.
+1. Download LiveData Migrator from the WANdisco Customer Portal.
 
 <div class="download">
 <a href="https://customer.wandisco.com">Download LiveData Migrator</a>
 </div>
 
-There are two installers available for LiveData Migrator:
+2. Make the script executable and install as the root (or sudo) user. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop      cluster.
 
-* **RPM package**
-  * Install LiveData Migrator as a system service for RHEL/CentOS-based Linux environments.
-* **DEB package**
-  * Install LiveData Migrator as a system service for Debian-based Linux environments.
+1. Install LiveData Migrator with the appropriate command:
 
-## Step 2 - Install LiveData Migrator
+    ```bash title="Red Hat/CentOS"
+    chmod +x one-ui_lm_rpm_installer.sh && ./one-ui_lm_rpm_installer.sh
+    ```
 
-Installing LiveData Migrator as a system service allows you to maintain long-lived migrations, have a common configuration that survives service restarts, and retain logging information in a central directory.
-
-1. Download `one-ui_lm_rpm_installer.sh` or `one-ui_lm_deb_installer.sh` depending on your Linux distribution and upload to your LiveData Migrator host.
-
-1. Make the script executable and install as the root (or sudo) user:
-
-   _Red Hat_  
-   `chmod +x one-ui_lm_rpm_installer.sh`  
-   `./one-ui_lm_rpm_installer.sh`  
-
-   _Debian_  
-   `chmod +x one-ui_lm_deb_installer.sh`  
-   `./one-ui_lm_deb_installer.sh`  
+    ```bash title="Debian"
+    chmod +x one-ui_lm_deb_installer.sh && ./one-ui_lm_deb_installer.sh
+    ```
 
    The above commands assume that the installer is inside your working directory.
 
@@ -79,51 +60,15 @@ Installing LiveData Migrator as a system service allows you to maintain long-liv
    1. [Configure the LiveData Migrator system service](#configure-the-livedata-migrator-system-service).
    1. [Run LiveData Migrator using the jar file (CLI access only)](./operation-cli.md#using-the-livedata-migrator-jar-optional).
 
-## Step 3 - Configure Kerberos authentication
+## Configure Kerberos authentication (optional)
 
-If Kerberos is enabled in your environment, edit the Kerberos security properties in the `/etc/wandisco/livedata-migrator/application.properties` file.
+If Kerberos is enabled in your environment:
 
-Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) section for details about the required properties.
+1. Edit the Kerberos security properties in the `/etc/wandisco/livedata-migrator/application.properties` file. Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) section for details about the required properties.
 
-Restart the LiveData Migrator service to make any configuration changes live:
+1. Restart the LiveData Migrator service to make any configuration changes live:
 
 `service livedata-migrator restart`
-
-## Reference
-
-### Directory structure
-
-When LiveData Migrator is installed as a [system service](#option-2-system-service), the following directories are used:
-
-| Location | Content |
-|---|---|
-| `/var/log/wandisco/livedata-migrator` | Logs |
-| `/etc/wandisco/livedata-migrator` | Configuration files |
-| `/opt/wandisco/livedata-migrator` | Java archive files |
-| `/opt/wandisco/livedata-migrator/db` | LiveData Migrator runtime state |
-
-The following UI directories are used:
-
-| Location | Content |
-|---|---|
-| `/var/log/wandisco/ui` | Logs |
-| `/etc/wandisco/ui` | Configuration files |
-| `/opt/wandisco/ui` | Operation files |
-| `/var/run/wandisco/ui` | UI runtime state |
-
-### System service commands
-
-#### LiveData Migrator
-
-The LiveData Migrator service script can be used to control operation of the service at any time:
-
-`service livedata-migrator start|stop|force-reload|restart|status`
-
-## UI
-
-The UI service script can be used to control operation of the service at any time:
-
-`service one-ui-server start|stop|force-reload|restart|status`
 
 ## Using LiveData Migrator
 
