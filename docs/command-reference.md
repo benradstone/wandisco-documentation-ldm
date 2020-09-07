@@ -520,293 +520,6 @@ SYNOPSYS
         filesystem types
 ```
 
-## Migration Commands
-
-----
-
-### `migration stop`
-
-Stop a migration from transferring and content to its target, placing it into the `STOPPED` state. You cannot resume an stopped migration.
-
-```text title="Stop a migration"
-SYNOPSYS
-        migration stop [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The identifier of the migration to stop.
-
-#### Example
-
-```text
-migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
-```
-
-----
-
-### `migration del`
-
-Delete a stopped migration resource.
-
-```text title="Delete a migration"
-SYNOPSYS
-        migration del [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The identifier of the migration to delete.
-
-#### Example
-
-```text
-migration del --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
-```
-
-----
-
-### `migration exclusion add`
-
-Associate an exclusion resource with a migration so that the exclusion policy applies to items processed for the migration. Exclusions must be associated with a migration before they take effect.
-
-```text title="Add an exclusion to a migration"
-SYNOPSYS
-        migration exclusion add [--migration-id] string
-                                [--exclusion-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
-
-        --exclusion-id  string
-
-                [Mandatory]
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The identifier of the migration with which to associate the exclusion.
-* **`--exclusion-id`** The identifier of the exclusion to associate with the migration.
-
-#### Example
-
-```text
-migration exclusion add --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e --exclusion-id myexclusion1
-```
-
-----
-
-### `migration exclusion del`
-
-Remove an exclusion from association with a migration so that its policy no longer applies to items processed for the migration.
-
-```text title="Remove an exclusion from a migration"
-SYNOPSYS
-        migration exclusion del [--migration-id] string
-                                [--exclusion-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
-
-        --exclusion-id  string
-
-                [Mandatory]
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The identifier of the migration from which to remove the exclusion.
-* **`--exclusion-id`** The identifier of the exclusion to remove from the migration.
-
-#### Example
-
-```text
-migration exclusion del --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e --exclusion-id myexclusion1
-```
-
-----
-
-### `migration list`
-
-Present the list of all migrations defined.
-
-```text title="List running and active migrations"
-SYNOPSYS
-        migration list
-```
-
-----
-
-### `migration new`
-
-Create a new migration to initiate data migration from your source file system.
-
-```text title="Create a new migration"
-SYNOPSYS
-        migration new [--path] string
-                      [--target] string
-                      [--migration-id] string
-                      [--exclusions] string
-                      [--auto-start]
-
-OPTIONS
-        --path  string
-
-                [Mandatory]
-
-        --target  string
-
-                [Mandatory]
-
-        –-migration-id  string
-
-                [Mandatory]
-
-        --exclusions  string
-
-                [Optional, default = <none>]
-
-        --auto-start
-                [Optional, default = false]
-
-        --action-policy  string
-                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
-```
-
-#### Mandatory Parameters
-
-* **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target.
-* **`--target`** Specifies the name of the target file system resource to which migration will occur.
-* **`--migration-id`** Provide an identifier for the new migration.
-
-#### Optional Parameters
-
-* **`--exclusions`** A comma-separated list of exclusions by name.
-* **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run.
-* **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size.  
-  There are two options available:
-  1. **`com.wandisco.livemigrator2.migration.OverwriteActionPolicy`** _(default policy)_  
-     Every file is replaced, even if file size is identical on the target storage.
-  1. **`com.wandisco.livemigrator2.migration.SkipIfSizeMatchActionPolicy`**  
-     If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
-
-#### Example
-
-```text
-migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
-```
-
-----
-
-### `migration run`
-
-Start a migration that was created without the `--auto-start` parameter, or resume a migration that was paused.
-
-```text title="Start or resume a migration"
-SYNOPSYS
-        migration run [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The identifier of the migration to run.
-
-#### Example
-
-```text
-migration run –-migration-id myNewMigration
-```
-
-----
-
-### `migration show`
-
-Provide a JSON description of a specific migration.
-
-```text title="Get migration details"
-NAME
-        migration show - Get migration details.
-
-SYNOPSYS
-        migration show [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The identifier of the migration to show.
-
-#### Example
-
-```text
-migration show --migration-id myNewMigration
-```
-
-----
-
-### `status`
-
-Get a text description of the overall status of migrations. Information is provided on the following:
-
-* Total number of migrations defined.
-* Average bandwidth being used over 10s, 60s, and 300s intervals.
-* Peak bandwidth observed over 300s interval.
-* Average file transfer rate per second over  10s, 60s, and 300s intervals.
-* Peak file transfer rate per second over a 300s interval.
-* List of live migrations with source path and migration id.
-* List of running migrations with source path and migration id.
-* List of non-running migrations source source path and migration id.
-
-```text title="Get migration status"
-NAME
-        status - Get migration status.
-
-SYNOPSYS
-        status
-```
-
-#### Examples
-
-```text
-status
-
-Total Migrations:  1
-Average Bandwidth: 0.00 Gb/s, 0.00 Gb/s, 0.00 Gb/s
-Peak Bandwidth:    0.00 Gb/s
-Average Files/s:   0, 0, 0
-Peak Files/s:      0
-
-Live: 0
-
-Running: 0
-
-Ready: 1
-     /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
-```
-
 ## Exclusion Commands
 
 ----
@@ -1152,15 +865,302 @@ The action prompt provides many features to guide you during operation.
 | **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
 | **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
 
-### System service commands
+## Migration Commands
 
-#### LiveData Migrator
+----
+
+### `migration stop`
+
+Stop a migration from transferring and content to its target, placing it into the `STOPPED` state. You cannot resume an stopped migration.
+
+```text title="Stop a migration"
+SYNOPSYS
+        migration stop [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The identifier of the migration to stop.
+
+#### Example
+
+```text
+migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
+```
+
+----
+
+### `migration del`
+
+Delete a stopped migration resource.
+
+```text title="Delete a migration"
+SYNOPSYS
+        migration del [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The identifier of the migration to delete.
+
+#### Example
+
+```text
+migration del --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
+```
+
+----
+
+### `migration exclusion add`
+
+Associate an exclusion resource with a migration so that the exclusion policy applies to items processed for the migration. Exclusions must be associated with a migration before they take effect.
+
+```text title="Add an exclusion to a migration"
+SYNOPSYS
+        migration exclusion add [--migration-id] string
+                                [--exclusion-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+
+        --exclusion-id  string
+
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The identifier of the migration with which to associate the exclusion.
+* **`--exclusion-id`** The identifier of the exclusion to associate with the migration.
+
+#### Example
+
+```text
+migration exclusion add --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e --exclusion-id myexclusion1
+```
+
+----
+
+### `migration exclusion del`
+
+Remove an exclusion from association with a migration so that its policy no longer applies to items processed for the migration.
+
+```text title="Remove an exclusion from a migration"
+SYNOPSYS
+        migration exclusion del [--migration-id] string
+                                [--exclusion-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+
+        --exclusion-id  string
+
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The identifier of the migration from which to remove the exclusion.
+* **`--exclusion-id`** The identifier of the exclusion to remove from the migration.
+
+#### Example
+
+```text
+migration exclusion del --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e --exclusion-id myexclusion1
+```
+
+----
+
+### `migration list`
+
+Present the list of all migrations defined.
+
+```text title="List running and active migrations"
+SYNOPSYS
+        migration list
+```
+
+----
+
+### `migration new`
+
+Create a new migration to initiate data migration from your source file system.
+
+```text title="Create a new migration"
+SYNOPSYS
+        migration new [--path] string
+                      [--target] string
+                      [--migration-id] string
+                      [--exclusions] string
+                      [--auto-start]
+
+OPTIONS
+        --path  string
+
+                [Mandatory]
+
+        --target  string
+
+                [Mandatory]
+
+        –-migration-id  string
+
+                [Mandatory]
+
+        --exclusions  string
+
+                [Optional, default = <none>]
+
+        --auto-start
+                [Optional, default = false]
+
+        --action-policy  string
+                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
+```
+
+#### Mandatory Parameters
+
+* **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target.
+* **`--target`** Specifies the name of the target file system resource to which migration will occur.
+* **`--migration-id`** Provide an identifier for the new migration.
+
+#### Optional Parameters
+
+* **`--exclusions`** A comma-separated list of exclusions by name.
+* **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run.
+* **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size.  
+  There are two options available:
+  1. **`com.wandisco.livemigrator2.migration.OverwriteActionPolicy`** _(default policy)_  
+     Every file is replaced, even if file size is identical on the target storage.
+  1. **`com.wandisco.livemigrator2.migration.SkipIfSizeMatchActionPolicy`**  
+     If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
+
+#### Example
+
+```text
+migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
+```
+
+----
+
+### `migration run`
+
+Start a migration that was created without the `--auto-start` parameter, or resume a migration that was paused.
+
+```text title="Start or resume a migration"
+SYNOPSYS
+        migration run [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The identifier of the migration to run.
+
+#### Example
+
+```text
+migration run –-migration-id myNewMigration
+```
+
+----
+
+### `migration show`
+
+Provide a JSON description of a specific migration.
+
+```text title="Get migration details"
+NAME
+        migration show - Get migration details.
+
+SYNOPSYS
+        migration show [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The identifier of the migration to show.
+
+#### Example
+
+```text
+migration show --migration-id myNewMigration
+```
+
+----
+
+### `status`
+
+Get a text description of the overall status of migrations. Information is provided on the following:
+
+* Total number of migrations defined.
+* Average bandwidth being used over 10s, 60s, and 300s intervals.
+* Peak bandwidth observed over 300s interval.
+* Average file transfer rate per second over  10s, 60s, and 300s intervals.
+* Peak file transfer rate per second over a 300s interval.
+* List of live migrations with source path and migration id.
+* List of running migrations with source path and migration id.
+* List of non-running migrations source source path and migration id.
+
+```text title="Get migration status"
+NAME
+        status - Get migration status.
+
+SYNOPSYS
+        status
+```
+
+#### Examples
+
+```text
+status
+
+Total Migrations:  1
+Average Bandwidth: 0.00 Gb/s, 0.00 Gb/s, 0.00 Gb/s
+Peak Bandwidth:    0.00 Gb/s
+Average Files/s:   0, 0, 0
+Peak Files/s:      0
+
+Live: 0
+
+Running: 0
+
+Ready: 1
+     /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
+```
+
+## System service commands
+
+### LiveData Migrator
 
 The LiveData Migrator service script can be used to control operation of the service at any time:
 
 `service livedata-migrator start|stop|force-reload|restart|status`
 
-## UI
+### UI
 
 The UI service script can be used to control operation of the service at any time:
 

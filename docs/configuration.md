@@ -299,7 +299,7 @@ Configure how the UI uses SSL, which is disabled by default.
 | `server.ssl.key-alias` | The alias of the certificate to be used |
 | `server.ssl.key-store-type` | Optional: set the key store type. Defaults to `PKCS12` |
 
-### Directory structure
+## Directory structure
 
 When LiveData Migrator is installed as a [system service](#option-2-system-service), the following directories are used:
 
