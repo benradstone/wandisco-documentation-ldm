@@ -9,7 +9,7 @@ You can use the command line interface (CLI) to create and manage resources that
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
 ## Before you start
-To start using LiveData Migrator, you'll need to configure management access and use SSH to access the action prompt. The CLI can be accessed as any system user using SSH.
+To start using LiveData Migrator, you'll need to configure management access using SSH.
 
 1. Edit the SSH access properties in the `/etc/wandisco/livedata-migrator/application.properties` file to adjust to your requirements. Refer to the [SSH access](./configuration.md#ssh-access) section for details about the required properties.
 1. Restart the LiveData Migrator service to make any configuration changes live:
@@ -30,7 +30,7 @@ This starts LiveData Migrator and the action prompt appears.
 
 ### Use authorized SSH keys
 
-Configure the LiveData Migrator service to use authorized SSH keys instead of a password by following these steps:
+Configure the LiveData Migrator service to use authorized SSH keys instead of a password:
 
 1. Comment out the `ssh.shell.password` configuration property so that password access is disabled.
 1. Specify an authorized keys file with `ssh.shell.authorized-public-keys-file` to allow access from authorized clients that hold a matching private key.
@@ -51,17 +51,23 @@ Define the following resources using LiveData Migrator in the CLI to start migra
 
 You can find a summary of the commands used for each resource type here. Each command links to the [LiveData Migrator Command Reference](./command-reference.md) page with more details on mandatory and optional parameters (including examples).
 
+### Built-in commands
+
+The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
+
+See the [Built-In Commands](./command-reference.md#built-in-commands) section in Command Reference for further details of the available commands.
+
 ### Command line help
 
 Find a full list of commands that can be used at the action prompt with the `help` command. Get command specific help by typing `help <command>` for each command available.
 
 Type the `<tab>` key if you are uncertain whether a command requires an additional parameter, or if you need to provide a specific value. It will help auto-complete parameter values, and display options available for any command.
 
-## Migrate data
+## Configure storages
 
-### Validate Source
+### Validate your source
 
-LiveData Migrator migrates data from a source file system. Validate that the correct source file system is registered or delete the existing one (define a new source in the [Add File Systems](#add-file-systems) step).
+LiveData Migrator migrates data from a source file system. Validate that the correct source file system is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
 
 :::info
 The source file system is normally detected on startup. It will not be detected automatically if your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
@@ -75,7 +81,7 @@ You can manage the source file system through these commands.
 | [`source del`](./command-reference.md#source-del) | Delete a source |
 | [`source fs show`](./command-reference.md#source-fs-show) | Show the source FileSystem configuration |
 
-### Add File Systems
+### Add file systems
 
 Add file systems to provide LiveData Migrator with the information needed to read content from your source and migrate content to your target.
 
@@ -106,11 +112,13 @@ Local file system and Google Cloud Storage functionality are available as a prev
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
-### Define Exclusions
+## Migrate data
 
-Define exclusions to constrain the content migrated from a source file system.
+### Add and remove exclusions
 
-Exclusions need to be associated with migrations. You can do this when you create a migration, or associate exclusions with an existing migration.
+Define exclusions to constrain content migrated from a source file system. You can do this when you create a migration, or associate exclusions with an existing migration.
+
+Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions. Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
 
 | Command | Action |
 |:---|:---|
@@ -120,15 +128,17 @@ Exclusions need to be associated with migrations. You can do this when you creat
 | [`exclusion list`](./command-reference.md#exclusion-list) | List all exclusion rules |
 | [`exclusion show`](./command-reference.md#exclusion-show) | Get details for a particular exclusion rule |
 
-Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions. Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
+### Create migrations
 
-### Create and manage Migrations
-
-Create migration resources to define and initiate data migration.
-
-Migration occurs from your source file system to a target defined using a `filesystem` command. Migrations will transfer existing data, as well as any subsequent changes made to the source data (in its scope), while LiveData Migrator remains in operation.
+Migrate data from your source file system to a target defined using a `filesystem` command. Migrations will transfer existing data, as well as any subsequent changes made to the source data (in its scope), while LiveData Migrator remains in operation.
 
 You will typically create multiple migrations so that you can select specific content from your source file system by path/directory. It is also possible to migrate to multiple independent file systems at the same time by defining multiple migration resources.
+
+1. Choose a source and target from previously defined storages.
+1. Choose the Path to set the scope of the migration.
+1. Apply any exclusions to reduce the scope within this Path.
+
+### Manage migrations
 
 | Command | Action |
 |:---|:---|
@@ -142,9 +152,9 @@ You will typically create multiple migrations so that you can select specific co
 | [`migration show`](./command-reference.md#migration-show) | Get migration details |
 | [`status`](./command-reference.md#status) | Get migration status |
 
-#### Migration states
+### Migration states
 
-Migrations exist in one of eight states:
+Migrations can be in one of eight states:
 
 `NONSCHEDULED`
 : A *non-scheduled migration* has been defined but not yet started. Create a migration in this state by not specifying the `--auto-start` parameter on creation.
@@ -169,12 +179,6 @@ Migrations exist in one of eight states:
 
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
-
-## Built-In Commands
-
-The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
-
-See the [Built-In Commands](./command-reference.md#built-in-commands) section in Command Reference for further details of the available commands.
 
 ## Using the LiveData Migrator jar (optional)
 
