@@ -2,7 +2,6 @@ module.exports = {
   someSidebar: {
     Documentation: [
       'about',
-      'quickstart',
       'installation',
       {
         "Using LiveData Migrator": [
