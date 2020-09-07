@@ -18,7 +18,7 @@ To start using LiveData Migrator with the CLI, you'll need to configure manageme
 
 ### Log in
 
-Without any change to configuration, log in as the `user` user with the password `password` on port `2222`.
+Log in with the default credentials of user `user`  with the password `password` on port `2222`.
 
 ```bash title="Example"
 $ ssh user@localhost -p 2222
@@ -39,7 +39,7 @@ Configure the LiveData Migrator service to use authorized SSH keys instead of a 
 
 ## LiveData Migrator commands
 
-You'll use the following commands to manage resources and migrate data with the LiveData Migrator CLI. Follow the links to learn the  mandatory and optional parameters, and see examples.
+Use the following commands to manage resources and migrate data with the LiveData Migrator CLI. Follow the links to learn the  mandatory and optional parameters, and see examples.
 
 * [**Source**](./command-reference.md#source-commands): Manage your source file system.
 
@@ -153,7 +153,7 @@ Follow the command links to learn how to set the parameters and see examples.
 
     Apply the [`--auto-start`](./command-reference.md#optional-parameters-5) parameter if you would like the migration to start right away.
 
-1. To manually start the migration (and don't have auto-start enabled):
+1. If you don't have auto-start enabled, manually start the migration:
 
     [`migration run`](./command-reference.md#migration-run)
 
@@ -167,8 +167,7 @@ Follow the command links to learn how to set the parameters and see examples.
 | [`migration exclusion add`](./command-reference.md#migration-exclusion-add) | Add an exclusion to a migration |
 | [`migration exclusion del`](./command-reference.md#migration-exclusion-del) | Remove an exclusion from a migration |
 | [`migration list`](./command-reference.md#migration-list) | List running and active migrations |
-| [`migration new`](./command-reference.md#migration-new) | Create a new migration |
-| [`migration run`](./command-reference.md#migration-run) | Start or resume a migration |
+| [`migration run`](./command-reference.md#migration-run) | Resume a migration |
 | [`migration show`](./command-reference.md#migration-show) | Get migration details |
 | [`status`](./command-reference.md#status) | Get migration status |
 
