@@ -4,23 +4,19 @@ title: Using LiveData Migrator with the Command Line
 sidebar_label: CLI
 ---
 
-This guide teaches you how to create and manage resources that control your migrations using the command line interface (CLI).
+You can use the command line interface (CLI) to create and manage resources that control your migrations in LiveData Migrator.
 
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
 ## Before you start
+To start using LiveData Migrator, you'll need to configure management access and use SSH to access the action prompt. The CLI can be accessed as any system user using SSH.
 
-Configure management Access and use SSH to access the action prompt (you can access the CLI as any system user using SSH).
+1. Edit the SSH access properties in the `/etc/wandisco/livedata-migrator/application.properties` file to adjust to your requirements. Refer to the [SSH access](./configuration.md#ssh-access) section for details about the required properties.
+1. Restart the LiveData Migrator service to make any configuration changes live:
 
-Edit the SSH access properties in the `/etc/wandisco/livedata-migrator/application.properties` file to adjust to your requirements.
+    `service livedata-migrator restart`
 
-Refer to the [SSH access](./configuration.md#ssh-access) section for details about the required properties.
-
-Restart the LiveData Migrator service to make any configuration changes live:
-
-`service livedata-migrator restart`
-
-### Default access
+### Log in
 
 Without any change to configuration, you can login as the `user` user with the password `password` on port `2222`.
 
