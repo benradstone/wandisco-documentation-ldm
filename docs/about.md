@@ -34,6 +34,4 @@ LiveData Platform solves the challenges of migrating large data volumes from Had
 
 ## Get started
 
-If you want to use LiveData Migrator immediately, follow the [Quickstart](./quickstart.md) guide.
-
-Use these [prerequisites](./installation.md#prerequisites) to prepare your environment for installation and successful data migrations. Once set up, you're ready to [install LiveData Migrator](./installation.md).
+Ready to use LiveData Migrator? See the [prerequisites](./installation.md#prerequisites) to prepare your environment for installation and successful data migrations. Once set up, you're ready to [install LiveData Migrator](./installation.md).
