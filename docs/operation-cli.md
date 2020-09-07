@@ -1,6 +1,6 @@
 ---
 id: operation-cli
-title: Using LiveData Migrator with the Command Line
+title: Using LiveData Migrator with the CLI
 sidebar_label: CLI
 ---
 
@@ -9,7 +9,7 @@ You can use the command line interface (CLI) to create and manage resources that
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
 ## Before you start
-To start using LiveData Migrator, you'll need to configure management access using SSH.
+To start using LiveData Migrator with the CLI, you'll need to configure management access using SSH.
 
 1. Edit the SSH access properties in the `/etc/wandisco/livedata-migrator/application.properties` file to adjust to your requirements. Refer to the [SSH access](./configuration.md#ssh-access) section for details about the required properties.
 1. Restart the LiveData Migrator service to make any configuration changes live:
@@ -18,7 +18,7 @@ To start using LiveData Migrator, you'll need to configure management access usi
 
 ### Log in
 
-Without any change to configuration, you can login as the `user` user with the password `password` on port `2222`.
+Without any change to configuration, log in as the `user` user with the password `password` on port `2222`.
 
 ```bash title="Example"
 $ ssh user@localhost -p 2222
@@ -37,19 +37,19 @@ Configure the LiveData Migrator service to use authorized SSH keys instead of a 
 1. Restart the LiveData Migrator service afterwards:  
    `service livedata-migrator restart`
 
-## How the LiveData Migrator CLI works
+## LiveData Migrator commands
 
-Define the following resources using LiveData Migrator in the CLI to start migrating data:
+You'll use the following commands to manage resources and migrate data with the LiveData Migrator CLI. Follow the links to learn the  mandatory and optional parameters, and see examples.
 
-1. **Source**: Manage your source file system.
+* [**Source**](./command-reference.md#source-commands): Manage your source file system.
 
-1. **Filesystem**: Create and manage file systems (storages) and define them as the source or target of migrations.
+* [**Filesystem**](./command-reference.md#file-system-commands): Create and manage file systems (storages) and define them as the source or target of migrations.
 
-1. **Exclusion**: Constrain the content migrated by creating and referencing exclusions during a migration. Exclusion constrain content by file size or by a regular expression match against a file name.
+* [**Exclusion**](./command-reference.md#exclusion-commands): Constrain the content migrated by creating and referencing exclusions during a migration. Exclusion constrain content by file size or by a regular expression match against a file name.
 
-1. **Migration**: A migration references the source and target file systems. Specify the source file system directory path for content to be migrated from, and include any exclusions as needed.
+* [**Migration**](./command-reference.md#migration-commands): A migration references the source and target file systems. Specify the source file system directory path for content to be migrated from, and include any exclusions as needed.
 
-You can find a summary of the commands used for each resource type here. Each command links to the [LiveData Migrator Command Reference](./command-reference.md) page with more details on mandatory and optional parameters (including examples).
+See the [Command Reference](./command-reference.md) page for a full list of LiveData Migrator commands and parameters.
 
 ### Built-in commands
 
@@ -63,7 +63,7 @@ Find a full list of commands that can be used at the action prompt with the `hel
 
 Type the `<tab>` key if you are uncertain whether a command requires an additional parameter, or if you need to provide a specific value. It will help auto-complete parameter values, and display options available for any command.
 
-## Configure storages
+## Configure storage
 
 ### Validate your source
 
@@ -106,43 +106,63 @@ Local file system and Google Cloud Storage functionality are available as a prev
 | [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) | Add a Hadoop HDFS file system resource |
 | [`filesystem add local`](./command-reference.md#filesystem-add-local) | Add a local file system resource |
 | [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add an S3 file system resource |
+
+### Manage file systems
+
+| Command | Action |
+|:---|:---|
 | [`filesystem clear`](./command-reference.md#filesystem-clear) | Delete all target file systems |
 | [`filesystem del`](./command-reference.md#filesystem-del) | Delete a target file system |
 | [`filesystem list`](./command-reference.md#filesystem-list) | List of target file systems |
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
-## Migrate data
+## Configure exclusions
 
-### Add and remove exclusions
+Exclusions constrain content migrated from a source file system. Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
 
-Define exclusions to constrain content migrated from a source file system. You can do this when you create a migration, or associate exclusions with an existing migration.
-
-Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions. Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
+### Define exclusions
+Define exclusions so you can apply them to migrations.
 
 | Command | Action |
 |:---|:---|
 | [`exclusion add file-size`](./command-reference.md#exclusion-add-file-size) | Create a new file size rule |
 | [`exclusion add regex`](./command-reference.md#exclusion-add-regex) | Create a new regex exclusion rule |
+
+### Manage exclusions
+
+| Command | Action |
+|:---|:---|
 | [`exclusion del`](./command-reference.md#exclusion-del) | Delete an exclusion rule |
 | [`exclusion list`](./command-reference.md#exclusion-list) | List all exclusion rules |
 | [`exclusion show`](./command-reference.md#exclusion-show) | Get details for a particular exclusion rule |
 
+## Migrate data
+
 ### Create migrations
 
-Migrate data from your source file system to a target defined using a `filesystem` command. Migrations will transfer existing data, as well as any subsequent changes made to the source data (in its scope), while LiveData Migrator remains in operation.
+Migrate data from your source file system to a target defined using the `migration` command. Migrations will transfer existing data, as well as any subsequent changes made to the source data (in its scope), while LiveData Migrator remains in operation.
 
 You will typically create multiple migrations so that you can select specific content from your source file system by path/directory. It is also possible to migrate to multiple independent file systems at the same time by defining multiple migration resources.
 
-1. Choose a source and target from previously defined storages.
-1. Choose the Path to set the scope of the migration.
-1. Apply any exclusions to reduce the scope within this Path.
+Follow the command links to learn how to set the parameters and see examples.
+
+1. Create a new migration:
+
+    [`migration new`](./command-reference.md#migration-new)
+
+    Apply the [`--auto-start`](./command-reference.md#optional-parameters-5) parameter if you would like the migration to start right away.
+
+1. To manually start the migration (and don't have auto-start enabled):
+
+    [`migration run`](./command-reference.md#migration-run)
+
 
 ### Manage migrations
 
 | Command | Action |
 |:---|:---|
-| [`migration stop`](./command-reference.md#migration-stop) | Abort a migration |
+| [`migration stop`](./command-reference.md#migration-stop) | Stop a migration |
 | [`migration del`](./command-reference.md#migration-del) | Delete a migration |
 | [`migration exclusion add`](./command-reference.md#migration-exclusion-add) | Add an exclusion to a migration |
 | [`migration exclusion del`](./command-reference.md#migration-exclusion-del) | Remove an exclusion from a migration |
