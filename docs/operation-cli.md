@@ -18,7 +18,7 @@ To start using LiveData Migrator with the CLI, you'll need to configure manageme
 
 ### Log in
 
-Log in as the `user` user with the password `password` on port `2222`.
+Log in with the default credentials of user `user`  with the password `password` on port `2222`.
 
 ```bash title="Example"
 $ ssh user@localhost -p 2222
