@@ -4,28 +4,68 @@ title: Configuration
 sidebar_label: Configuration
 ---
 
-:::note Public Preview
-LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.
+Find details here for the configuration properties that you can use when running LiveData Migrator as a system service. Properties are defined in the following files:
+* LiveData Migrator `/etc/wandisco/livedata-migrator/application.properties`
+* UI `/etc/wandisco/ui/application-prod.properties`
+
+Each configuration property can also be provided to LiveData Migrator as a command-line argument when launched, e.g. `--server.port=19999`.
+
+:::note
+You'll need to perform a restart after making any configuration changes to LiveData Migrator or the UI. To do this, run `service livedata-migrator restart` or `service one-ui-server restart` as appropriate.
 :::
 
-Find details here for the configuration properties that you can use when running LiveData Migrator as a system service. Properties are defined in the `/etc/wandisco/live-migrator/application.properties` file. Each configuration property can also be provided to LiveData Migrator as a command-line argument when launched, e.g. `--server.port=19999`.
+## LiveData Migrator Configuration
 
 An example `application.properties` file:
 
 ```text
 # pretty print JSON output in API results
 spring.jackson.serialization.INDENT_OUTPUT=true
-springdoc.swagger-ui.path=/lm2-api.html
-# spring.main.lazy-initialization = true
+springdoc.swagger-ui.path=/ldm-api.html
+spring.main.lazy-initialization = false
 pull.threads=50
 engine.threads=1000
 persisted.store=true
-server.port=18080
-shell.history.filePath=~/.livemigrator_history
+migration.file.max.retries=180
+migration.scan.iteration-limit=1000
+migration.scan.allow-stop-path=false
+shell.history.filePath=~/.livedatamigrator_history
 cli.enabled=true
-ssh.shell.enable=true
-ssh.shell.prompt.local.enable=${cli.enabled}
 spring.shell.interactive.enabled=${cli.enabled}
+ssh.shell.enable=false
+ssh.shell.prompt.local.enable=${cli.enabled}
+ssh.shell.interactive.enabled=${cli.enabled}
+ssh.shell.default-commands.jvm=false
+ssh.shell.default-commands.postprocessors=false
+ssh.shell.default-commands.threads=false
+
+# ===================================================================
+# SSL
+# ===================================================================
+# Note: If HTTPS is enabled, it will completely replace HTTP as
+# the protocol over which the REST endpoints and the Data Flow
+# Dashboard interact. Plain HTTP requests will fail
+#
+# To enable TLS in production, generate a certificate using:
+# keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+#
+# You can also use Let's Encrypt:
+# https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
+#
+# Then, enable and modify the following server.ssl properties, filling in
+# system specific information (path to key store, password,
+# preferred port etc.)
+#
+server.port=18080
+# server.ssl.key-store=path/to/keystore.p12
+# # This can also be a key on the classpath, instead of a directory
+# # server.ssl.key-store=classpath:keystore.p12
+# server.ssl.key-store-password=password
+# server.ssl.key-store-type=PKCS12
+# server.ssl.key-alias=livedata-migrator
+# # The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against SSL Labs (https://www.ssllabs.com/ssltest/)
+# server.ssl.ciphers=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 ,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+# ===================================================================
 
 # prevayler configuration
 install.dir=
@@ -34,23 +74,35 @@ prevayler.persistent=true
 prevayler.force=true
 prevayler.bufferedJournal=true
 prevayler.mirrored=true
+prevayler.deepCopy=false
 
 # security configuration for basic authentication
 security.type=off
 #security.type=basic
 #security.basic.user=admin
 #security.basic.password={bcrypt}$2a$10$kXzfqwiiCY/ZW9e9BboNmuIbe5xe2kNjdk1YNUxmsCaQ7PlBLCe4W
-adls1.fs.type.default.properties=fs.scheme,fs.account.name,fs.container.name,fs.auth.type,fs.oauth2.client.id
-adls2.fs.type.default.properties=fs.scheme,fs.account.name,fs.container.name,fs.auth.type,fs.oauth2.client.id
+adls1.fs.type.default.properties=fs.scheme,fs.account.name,fs.container.name,fs.auth.type,fs.oauth2.client.id,fs.insecure
+adls2.fs.type.default.properties=fs.scheme,fs.account.name,fs.container.name,fs.auth.type,fs.oauth2.client.id,fs.insecure
 hdfs.fs.type.default.properties=fs.defaultFS
 s3a.fs.type.default.properties=fs.defaultFS
+gcs.fs.type.default.properties=bucket.name
 local.fs.type.default.properties=fs.root
 
+#properties we need to mask when displaying to the user
+adls2.fs.type.masked.properties=fs.secret.Key
+adls1.fs.type.masked.properties=fs.secret.Key
+hdfs.fs.type.masked.properties=
+local.fs.type.masked.properties=
+s3a.fs.type.masked.properties=fs.s3a.access.key,fs.s3a.secret.key
+gcs.fs.type.masked.properties=service.account.private.key.id,service.account.private.key
+
 lm.kerberos.is.enabled=false
-#lm.kerberos.principal=hdfs-dmagen-02@WANDISCO.HADOOP
+#lm.kerberos.principal=hdfs@REALM
 #lm.kerberos.keytab.location=/etc/security/keytabs/hdfs.headless.keytab
 lm.kerberos.principal=
 lm.kerberos.keytab.location=
+
+license.key.location=/opt/wandisco/livedata-migrator/
 
 # HTTP traffic logging config
 logging.level.org.zalando.logbook=TRACE
@@ -60,19 +112,23 @@ logbook.exclude=/v3/api-docs/**,/swagger-ui/**
 # HTTP message masking properties
 #logbook.obfuscate.parameters=access_token,password
 #logbook.obfuscate.headers=authorization,x-auth-password,x-auth-token,X-Secret
-#obfuscate.json.properties=foo,bar
+obfuscate.json.properties=fs.secret.Key,fs.s3a.access.key,fs.s3a.secret.key,${gcs.fs.type.masked.properties}
 
-ssh.shell.prompt.text=WANdisco LiveMigrator >>\u0020
+ssh.shell.prompt.text=WANdisco LiveData Migrator >>\u0020
 ssh.shell.prompt.color=white
 ssh.shell.authentication=simple
 ssh.shell.user=user
 ssh.shell.password=password
+ssh.shell.host=127.0.0.1
 ssh.shell.port=2222
-ssh.shell.historyFile=${user.home}/.livemigrator_history
+ssh.shell.historyFile=${java.io.tmpdir}/.livedatamigrator_history_ssh
 #ssh.shell.authorized-public-keys-file=samples/public-keys-sample
+
+hdfs.inotify.poll.period=10
+hdfs.inotify.sleep.period=10
 ```
 
-## General configuration
+### General configuration
 
 These configuration properties are used to adjust general items of operation.
 
@@ -88,7 +144,7 @@ These configuration properties are used to adjust general items of operation.
 | `cli.enabled` | Whether the action prompt interface will be made available from the LiveData Migrator instance<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 | `spring.shell.interactive.enabled` | Whether the console session with the action prompt is interactive or non-interactive, affecting prompt output, command completino and other interactive features<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 
-## SSH access
+### SSH access
 
 These configuration properties govern whether and how access to LiveData Migrator is provided using the [SSH protocol](https://en.wikipedia.org/wiki/Secure_Shell). You can manage LiveData Migrator when it operates as a system service using either the [REST API](./api-reference.md), or using SSH access to the console interface.
 
@@ -105,7 +161,7 @@ These configuration properties govern whether and how access to LiveData Migrato
 | `ssh.shell.historyFile` | The full path to the file in which the record of commands issued to the action prompt will be recorded<br/><br/>**Default value**: `${user.home}/.livemigrator_history`<br/>**Allowed values**: The full path to a valid filename in a directory that is writable by the user running LiveData Migrator (typically `hdfs`.)
 | `ssh.shell.authorized-public-keys-file` | The file containing public keys against which client credentials will be matched to authorize access to the console over SSH when LiveData Migrator is configured for `security` authentication<br/><br/>**Default value**: `samples/public-keys-sample`<br/>**Allowed values**: The full path to a file that contains one line entry per public key, in the same format used by `sshd`. |
 
-## Logging
+### Logging
 
 Configure how LiveData Migrator logs requests made against the [REST API](./api-reference.md).
 
@@ -119,9 +175,35 @@ Configure how LiveData Migrator logs requests made against the [REST API](./api-
 | `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, e.g. `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
 | `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, e.g. `foo,bar`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of property names |
 
-## State
+### Server SSL
 
-LiveData Migrator employes an internally-managed database to record state during operation called the Prevayler.
+To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
+
+:::note
+If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the REST API will fail.
+:::
+
+| Name | Details |
+| --- | --- |
+| `server.ssl.key-store` | Path or classpath to the Java keystore. <br/>**Default value**: (none) <br/>**Allowed values**: File system path or classpath (example:`/path/to/keystore.p12`, `classpath:keystore.p12`). |
+| `server.ssl.key-store-password` | The Java keystore password. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string. |
+| `server.ssl.key-store-type` | The Java keystore type. <br/>**Default value**: `PKCS12` <br/>**Allowed values**: [Keystore types](https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#KeyStore) |
+| `server.ssl.key-alias` | The alias for the server certificate entry. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string. |
+| `server.ssl.ciphers` | The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against [SSL Labs](https://www.ssllabs.com/ssltest/). <br/><br/> **Default value** <br/> `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA` |
+
+:::tip
+The example command below will generate a server certificate and place it inside a new Java keystore named `keystore.p12` (it will be created inside the user's home directory):
+
+```text
+keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 365
+```
+
+See the [keytool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for further information on the parameters used.
+:::
+
+### State
+
+LiveData Migrator uses an internally-managed database to record state during operation called the Prevayler.
 
 | Name | Details |
 | --- | --- |
@@ -131,9 +213,13 @@ LiveData Migrator employes an internally-managed database to record state during
 | `prevayler.bufferedJournal` | Whether buffered journal I/O is used for the database<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 | `prevayler.mirrored` | Whether actions tracked in-memory by the database are mirrored to disk on every modification. The alternative is for operation to periodically flush to disk and flush on shutdown.<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 
-## Security
+### Security
 
 Secure access to the LiveData Migrator [REST API](./api-reference.md) through configuration. Choose between no security or HTTP basic security.
+
+:::note
+If security is enabled on the REST API, unauthenticated requests from the CLI to the REST API will fail.
+:::
 
 | Name | Details |
 | --- | --- |
@@ -141,7 +227,7 @@ Secure access to the LiveData Migrator [REST API](./api-reference.md) through co
 | `security.basic.user` | The username that needs to be provided by a REST client to gain access to a secured REST API, e.g. `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
 | `security.basic.password` | A bcrypt-encrypted representation of the password that needs to be provided using HTTP basic authentication to acceess the REST API when LiveData Migrator is configured for `basic` security, e.g. `{bcrypt}$2a$10$kXzfqwiiCY/ZW9e9BboNmuIbe5xe2kNjdk1YNUxmsCaQ7PlBLCe4W`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
 
-## Kerberos Integration
+### Kerberos Integration
 
 Configure LiveData Migrator to work against securely-configured Hadoop environments using Kerberos. Note that when run as a command-line application, LiveData Migrator can use Kerberos credentials that are available as a result of the use of `kinit` instead of static configuration defined with these properties.
 
@@ -151,7 +237,7 @@ Configure LiveData Migrator to work against securely-configured Hadoop environme
 | `lm.kerberos.principal` | The Kerberos principal to use when authenticating to HDFS, e.g. `hdfs-dmagen-02@WANDISCO.HADOOP`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid Kerberos principal name |
 | `lm.kerberos.keytab.location` | The location of the keytab file in which credentials for the user defined above are provided, e.g. `/etc/security/keytabs/hdfs.headless.keytab`<br/><br/>**Default value**: (none)<br/>**Allowed values**: The full path to a keytab file that can be read by the user identity used to run LiveData Migrator (typically `hdfs`) |
 
-## File system defaults
+### File system defaults
 
 Each file system supported by LiveData Migrator can apply properties defined using the `--properties` or `--properties-files` parameters to the [various `filesystem add` commands](./command-reference#file-system-commands). You can set default properties that will apply to each type of file system at time of creation through these configuration items.
 
@@ -162,3 +248,73 @@ Each file system supported by LiveData Migrator can apply properties defined usi
 | `hdfs.fs.type.default.properties` | A comma-separated list of default properties to apply to ADLS Gen 1 file system resources on creation.<br/><br/>**Default value**: `fs.defaultFS`<br/>**Allowed values**: Any comma-separated list of valid HDFS configuration properties |
 | `s3a.fs.type.default.properties` | A comma-separated list of default properties to apply to S3A file system resources on creation.<br/><br/>**Default value**: `fs.defaultFS`<br/>**Allowed values**: Any comma-separated list of valid S3A configuration properties |
 | `local.fs.type.default.properties` | A comma-separated list of default properties to apply to S3A file system resources on creation.<br/><br/>**Default value**: `fs.root`<br/>**Allowed values**: Any comma-separated list of valid S3A configuration properties |
+
+### HDFS inotify
+
+LiveData Migrator will poll the Hadoop cluster for NameNode events using the [HDFS inotify](https://hadoop.apache.org/docs/r3.2.0/api/org/apache/hadoop/hdfs/inotify/package-summary.html) system. These properties can be configured to change the default poll periods.
+
+| Name | Details |
+| --- | --- |
+| `hdfs.inotify.poll.period` | The length of time in milliseconds between each event listener poll. <br/>**Default value**: `10` <br/>**Allowed values**: An integer value |
+| `hdfs.inotify.sleep.period` | The length of time in milliseconds for delaying the event listener poll after 10 consecutive retry failures. <br/>**Default value**: `10` <br/>**Allowed values**: An integer value |
+
+## UI Configuration
+
+An example `application-prod.properties` file, which overrides any application defaults.
+
+```text
+#Updated Application Properties
+#Wed Aug 26 11:39:52 UTC 2020
+spring.datasource.password=ENC(xxx)
+logging.output.path=/var/log/wandisco/ui
+application.liveMigratorV2.servers=localhost\:18080
+```
+
+### General configuration
+
+Configure how the UI is run overall.
+
+| Name | Details |
+| --- | --- |
+| `server.port` | Set the port on which the UI will be available. This is overriden by the `server.ssl.port` when SSL is enabled.<br/><br/>**Default value**: `8081`<br/>**Allowed values**: An integer value between `1024` and `65535` |
+
+### Logging
+
+Configure how the UI logs information about its state or user interactions.
+
+| Name | Details |
+| --- | --- |
+| `logging.output.path` | The output path for all logging.<br/><br/>**Default value**: `/var/log/wandisco/ui`<br/>**Allowed values**: The full path to a valid directory that is writable by the user running the UI (typically `hdfs`.)  |
+
+### Security
+
+Configure how the UI uses SSL, which is disabled by default.
+
+| Name | Details |
+| --- | --- |
+| `server.ssl.enabled` | Set to `true` to enable SSL. If no other SSL values are set, this will use an internal keystore and a self-signed certificate to serve the UI.<br/><br/>**Default value**: `false`<br/>**Allowed values**: `true`, `false` |
+| `server.ssl.port` | Set the port on which the UI should be available when SSL is enabled.<br/><br/>**Default value**: `8443`<br/>**Allowed values**: An integer value between `1024` and `65535` |
+| `server.ssl.key-store` | The path to the key store which should be used instead of the internal default |
+| `server.ssl.key-store-password` | The password to be used to access the key store |
+| `server.ssl.key-alias` | The alias of the certificate to be used |
+| `server.ssl.key-store-type` | Optional: set the key store type. Defaults to `PKCS12` |
+
+## Directory structure
+
+When LiveData Migrator is installed as a [system service](#option-2-system-service), the following directories are used:
+
+| Location | Content |
+|---|---|
+| `/var/log/wandisco/livedata-migrator` | Logs |
+| `/etc/wandisco/livedata-migrator` | Configuration files |
+| `/opt/wandisco/livedata-migrator` | Java archive files |
+| `/opt/wandisco/livedata-migrator/db` | LiveData Migrator runtime state |
+
+The following UI directories are used:
+
+| Location | Content |
+|---|---|
+| `/var/log/wandisco/ui` | Logs |
+| `/etc/wandisco/ui` | Configuration files |
+| `/opt/wandisco/ui` | Operation files |
+| `/var/run/wandisco/ui` | UI runtime state |
