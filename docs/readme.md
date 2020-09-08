@@ -1,6 +1,6 @@
-The live docs for public preview are currently available at https://docs.wandisco.com/live-data-migrator/docs/
+The live docs are currently available at https://docs.wandisco.com/live-data-migrator/docs/
 
-These are the docs for GA:
+These are the docs:
 
 [About](about.md)
 
