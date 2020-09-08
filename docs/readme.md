@@ -1,10 +1,8 @@
 The live docs for public preview are currently available at https://docs.wandisco.com/live-data-migrator/docs/
 
-These are the in development docs for GA:
+These are the docs for GA:
 
 [About](about.md)
-
-[Quickstart](quickstart.md)
 
 [Installation](installation.md)
 
@@ -17,13 +15,3 @@ These are the in development docs for GA:
 [Command Reference](command-reference.md)
 
 [API Reference](api-reference.md)
-
-
-
-
-
-
-
-
-
-
