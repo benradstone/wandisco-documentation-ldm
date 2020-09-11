@@ -33,13 +33,7 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 The LiveData Migrator preview license is limited to 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits. [Contact WANdisco to upgrade to a full license.](https://www.wandisco.com)
 
-## Download and install LiveData Migrator
-
-1. Download LiveData Migrator and upload to your chosen host. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop cluster.
-
-   <div class="download">
-   <a href="https://wandisco.com/downloads/livedata-migrator.sh">Download LiveData Migrator</a>
-   </div>
+## Install LiveData Migrator
 
 1. Make the installation script executable and install as the root (or sudo) user. These commands assume that the installer is inside your working directory.
 
