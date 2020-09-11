@@ -33,7 +33,7 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 The LiveData Migrator preview license is limited to 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits. [Contact WANdisco to upgrade to a full license.](https://www.wandisco.com)
 
-## Download and install LiveData Migrator
+## Install LiveData Migrator
 
 1. Make the installation script executable and install as the root (or sudo) user. These commands assume that the installer is inside your working directory.
 
