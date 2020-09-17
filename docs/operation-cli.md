@@ -96,13 +96,12 @@ If your source file system was not discovered automatically or you wish to assig
 You can define multiple target file systems, which you can migrate to at the same time.
 
 :::caution
-Google Cloud Storage functionality is available as a preview and is not yet a supported configuration.
+Although present when invoking the `help` command, Google Cloud Storage and Local Filesystem functionality is not yet available. This will be coming soon in a future release.
 :::
 
 | Command | Action |
 |:---|:---|
 | [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) | Add an ADLS Gen 2 file system resource |
-| [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) | Add a Google Cloud Storage file system resource |
 | [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) | Add a Hadoop HDFS file system resource |
 | [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add an S3 file system resource |
 
@@ -156,7 +155,6 @@ Follow the command links to learn how to set the parameters and see examples.
 
     [`migration run`](./command-reference.md#migration-run)
 
-
 ### Manage migrations
 
 | Command | Action |
@@ -198,7 +196,7 @@ Migrations can be in one of eight states:
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
 
-## Using the LiveData Migrator jar (optional)
+## Using the LiveData Migrator jar
 
 If you want to try out LiveData Migrator using a quick method, use the `livedata-migrator.jar`. This is an alternative to using the system service and it does not require configuration.
 
