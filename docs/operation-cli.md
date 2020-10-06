@@ -96,7 +96,7 @@ If your source file system was not discovered automatically or you wish to assig
 You can define multiple target file systems, which you can migrate to at the same time.
 
 :::caution
-Although present when invoking the `help` command, Local Filesystem functionality is not yet available. This will be coming soon in a future release.
+Although present when invoking the `help` command, Local Filesystem functionality is not yet available. This will be coming in a future release.
 :::
 
 | Command | Action |
