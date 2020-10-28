@@ -6,7 +6,7 @@ sidebar_label: Installation
 
 Ready to install? Check the prerequisites and then follow these steps to get up and running with LiveData Migrator.
 
-If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md).
+If you're new to the concept of LiveData, or want to know what LiveData Migrator does (including HiveMigrator), see the [introduction to LiveData Migrator](./about.md).
 
 ## Before you start
 
@@ -14,7 +14,8 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ### Prerequisites
 
-* Linux host running either Red Hat, CentOS or Ubuntu.
+* Linux host
+  * See the release notes link in the [Before you start](#before-you-start) section for a list of supported operating systems.
 * Java 1.8 64-bit.
 * Network connectivity from your LiveData Migrator host to your target storage (for example: ADLS Gen2 endpoint or S3 bucket).
 * Port 8081 accessible on your Linux host (to access the UI through a web browser).
@@ -22,6 +23,14 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
   * Hadoop client libraries must be installed on the Linux host.
   * Ability to authenticate as the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) (for example: `hdfs`).
   * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the HDFS superuser must be available on the Linux host.
+
+#### HiveMigrator Prerequisites
+
+If you want to use the HiveMigrator component for LiveData Migrator, ensure the following prerequisites are met:
+
+* The Hive service must be present on the cluster.
+* SSH/CLI access to the cluster.
+* If Kerberos is enabled on the cluster, access to the Hive service keytab and principal.
 
 ### Machine specification
 
@@ -73,6 +82,12 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
 
    1. Restart the LiveData Migrator service to make any configuration changes live:  
       `service livedata-migrator restart`
+
+### HiveMigrator
+
+ By default, the LiveData Migrator installation package automatically includes HiveMigrator.
+
+ If you have already installed a previous version of LiveData Migrator that did not include HiveMigrator, uninstall the old version and install the new LiveData Migrator package (that includes HiveMigrator).
 
 ## Using LiveData Migrator
 
