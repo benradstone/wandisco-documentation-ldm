@@ -11,7 +11,15 @@ module.exports = {
       },
       'configuration',
       'command-reference',
-      'api-reference'
+      'api-reference',
+      {
+        "Using the HDFS Sandbox": [
+          'sandbox-prerequisites',
+          'sandbox-create-vm',
+          'sandbox-install-sandbox',
+          'sandbox-testing'
+        ],
+      },
     ],
   },
 };
