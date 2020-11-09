@@ -22,7 +22,7 @@ Internet access from the host is not required, but when it is available, you'll 
 
 ### Upgrade your license
 
-Your trial license will last 14 days and is valid for 5TB of data. If you want to upgrade to a full license before you start using LiveData Migrator, follow these steps:
+If you want to upgrade to a full license before you start using LiveData Migrator, follow these steps:
 
 1. Click **Upgrade License**.
 1. Click the option to purchase a license now. Follow the provided instructions to get your license.
@@ -31,7 +31,7 @@ Your trial license will last 14 days and is valid for 5TB of data. If you want t
 1. Upload your new license.
 1. Review the license preview and ensure it is correct before selecting **Upload**.
 
-   The License panel displays your new limits and license expiry date. We'll notify you when it's time to renew your license.
+   The License panel displays your license limits and expiry date. We'll notify you when it's time to renew your license.
 
 ## How the UI works
 
