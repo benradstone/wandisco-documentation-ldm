@@ -19,7 +19,7 @@ To start using LiveData Migrator with the CLI, you'll need to configure manageme
 
 ### Upgrade your license
 
-Your trial license will last 14 days and is valid for 5TB of data. If you want to upgrade to a full license before you start using LiveData Migrator, follow these steps:
+If you want to upgrade to a full license before you start using LiveData Migrator, follow these steps:
 
 1. See the [How to upgrade your license](https://community.wandisco.com/s/article/How-to-upgrade-your-license) page for information on how to purchase a license key.
 1. Once you have obtained your license key, upload it to your LiveData Migrator host.
