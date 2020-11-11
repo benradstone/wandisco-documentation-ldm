@@ -16,7 +16,7 @@ Log in to the LiveData Migrator CLI using the following command:
 livedata-migrator --host=localhost
 ```
 
-The command prompt will then load and automatically connect to the LiveData Migrator services on your current host.
+The command prompt will then load and automatically connect to the LiveData Migrator services located on your host.
 
 ## Command line help
 
@@ -288,13 +288,13 @@ LiveData Migrator uses pending regions to keep your directories up to date if th
 
 LiveData Migrator collects pending regions automatically during a migration, but you can manually add them if you want the directories to be re-scanned after further updates. You can also re-run the entire migration by making the root directory the pending region.
 
-Add a pending region to a migration by running the `migration pending-region add` command.
+Add a pending region to a migration by running the `migration pending-region add command`.
 
 ```text title="Example"
 migration pending-region add --migration-id myFirstMigration --path /dir1/userA
 ```
 
-## Bandwidth management
+## Manage bandwidth
 
 Limit the total amount of bandwidth LiveData Migrator can use by using the `bandwidth policy` command. Once defined, the bandwidth limit will apply immediately to all migrations (new and ongoing).
 
@@ -305,6 +305,17 @@ Only one bandwidth policy can be active at a time. The default policy is unlimit
 | [`bandwidth policy del`](./command-reference.md#bandwidth-policy-del) | Delete a bandwidth policy |
 | [`bandwidth policy set`](./command-reference.md#bandwidth-policy-set) | Define the bandwidth policy |
 | [`bandwidth policy show`](./command-reference.md#bandwidth-policy-show) | Get details for the current bandwidth policy |
+
+## License management
+
+Upload a new license or show details of your current license with these commands.
+
+See the [How to upgrade your license](https://community.wandisco.com/s/article/How-to-upgrade-your-license) page for information on how to purchase a license key.
+
+| Command | Action |
+|:---|:---|
+| [`license show`](./command-reference.md#license-show) | Show details of your active license |
+| [`license upload`](./command-reference.md#license-upload) | Upload a new license file |
 
 ## Built-in commands
 
