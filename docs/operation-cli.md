@@ -294,7 +294,7 @@ Add a pending region to a migration by running the `migration pending-region add
 migration pending-region add --migration-id myFirstMigration --path /dir1/userA
 ```
 
-## Manage bandwidth
+## Bandwidth management
 
 Limit the total amount of bandwidth LiveData Migrator can use by using the `bandwidth policy` command. Once defined, the bandwidth limit will apply immediately to all migrations (new and ongoing).
 
