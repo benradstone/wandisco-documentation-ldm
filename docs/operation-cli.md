@@ -282,41 +282,19 @@ Follow the command links to learn how to set the parameters and see examples.
 | [`hive migration stop`](./command-reference.md#hive-migration-stop) | Stop a hive migration or a list of hive migrations |
 | [`hive migration stop --all`](./command-reference.md#hive-migration-stop---all) | Stop all hive migrations |
 
-## Pending Regions
+## Add pending regions
 
-Pending Regions are paths to data directories that have moved or changed during an active data migration. If you make changes to directories that are currently being migrated, you can assign a pending region to the path that is undergoing a lot of directory or file changes. LiveData Migrator resolves the list of pending regions when the migration finishes.
+LiveData Migrator uses pending regions to keep your directories up to date if they change during data migrations. If directories are updated while being migrated, the changed paths on the source filesystem are tracked by the migration so they can be re-scanned for updates when the migration finishes.
 
-Config options.
+LiveData Migrator collects pending regions automatically during a migration, but you can manually add them if you want the directories to be re-scanned after further updates. You can also re-run the entire migration by making the root directory the pending region.
 
-### Add a pending region
+Add a pending region to a migration by running the `migration pending-region add` command.
 
-Or actually, the simpler question is, when do you define the pending regions config parameter (e.g. during migration new)?
-
-LM2-1360: Ability to add new PendingRegions to an existing Migration
-
-Cool, so from LM2-1419, it looks like it will be a new command -
-```
-migration pending-region add
-```
-parameters
-```
-–-migration-id string and --path string
-```
-example
-```
+```text title="Example"
 migration pending-region add --migration-id myFirstMigration --path /dir1/userA
 ```
 
-### Change the maximum limit
-
-By default the maximum number of pending limits is one million. You can set a new limit by xyz.
-
-LM2-1339 - Change max pending regions. There is a ticket to support changing them through the CLI, LM2-1419. By default the MaxPending regions is 1M
-
-See our opening sentence here:
-https://docs.wandisco.com/live-data-migrator/docs/#features (edited)
-
-## Manage bandwidth
+## Bandwidth management
 
 Limit the total amount of bandwidth LiveData Migrator can use by using the `bandwidth policy` command. Once defined, the bandwidth limit will apply immediately to all migrations (new and ongoing).
 
