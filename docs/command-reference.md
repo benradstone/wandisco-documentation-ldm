@@ -2087,10 +2087,6 @@ OPTIONS
                 [Optional, default = <none>]
 ```
 
-#### Optional Parameters
-
-* **`--command`**, **`-C`** The command for which help information is wanted
-
 #### Example
 
 ```text
