@@ -656,7 +656,7 @@ exclusion show --exclusion-id 100mbfiles
 
 ### `migration stop`
 
-Stop a migration from transferring and content to its target, placing it into the `STOPPED` state. You cannot resume a stopped migration.
+Stop a migration from transferring content to its target, placing it into the `STOPPED` state. Stopped migrations can be resumed.
 
 ```text title="Stop a migration"
 SYNOPSYS
@@ -676,6 +676,32 @@ OPTIONS
 
 ```text
 migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
+```
+
+----
+
+### `migration resume`
+
+Resume a migration that you've stopped from transferring content to its target.
+
+```text title="Resume a migration"
+SYNOPSYS
+        migration resume [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The identifier of the migration to resume.
+
+#### Example
+
+```text
+migration resume --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
 ```
 
 ----
@@ -937,6 +963,32 @@ Running: 0
 Ready: 1
      /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
 ```
+
+## Pending Region Commands
+
+----
+
+### `migration pending-region add`
+
+Add a pending region manually to re-scan a directory if it has been updated.
+
+```text title="Add a pending region"
+SYNOPSYS
+        migration pending-region add
+```
+
+#### Mandatory Parameter
+
+* **`--migration-id`** The identifier of the migration to show.
+* **`--path`** The path to the pending region you want to add.
+
+#### Example
+
+```text title="Add a pending region to a migration"
+migration pending-region add --migration-id myFirstMigration --path /dir1/userA
+```
+
+----
 
 ## Bandwidth Policy Commands
 
