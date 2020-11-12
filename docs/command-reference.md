@@ -700,7 +700,7 @@ exclusion show --exclusion-id 100mbfiles
 
 ### `migration stop`
 
-Stop a migration from transferring and content to its target, placing it into the `STOPPED` state. You cannot resume a stopped migration.
+Stop a migration from transferring content to its target, placing it into the `STOPPED` state. Stopped migrations can be resumed.
 
 ```text title="Stop a migration"
 SYNOPSYS
@@ -720,6 +720,32 @@ OPTIONS
 
 ```text
 migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
+```
+
+----
+
+### `migration resume`
+
+Resume a migration that you've stopped from transferring content to its target.
+
+```text title="Resume a migration"
+SYNOPSYS
+        migration resume [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The identifier of the migration to resume.
+
+#### Example
+
+```text
+migration resume --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
 ```
 
 ----
@@ -981,6 +1007,32 @@ Running: 0
 Ready: 1
      /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
 ```
+
+## Pending Region Commands
+
+----
+
+### `migration pending-region add`
+
+Add a pending region manually to re-scan a directory if it has been updated.
+
+```text title="Add a pending region"
+SYNOPSYS
+        migration pending-region add
+```
+
+#### Mandatory Parameter
+
+* **`--migration-id`** The identifier of the migration to show.
+* **`--path`** The path to the pending region you want to add.
+
+#### Example
+
+```text title="Add a pending region to a migration"
+migration pending-region add --migration-id myFirstMigration --path /dir1/userA
+```
+
+----
 
 ## Bandwidth Policy Commands
 
@@ -2079,127 +2131,7 @@ OPTIONS
                 [Optional, default = <none>]
 ```
 
-#### Optional Parameters
-
-* **`--command`**, **`-C`** The command for which help information is wanted
-
 #### Example
-
-:::caution
-Although present when invoking the `help` command, Local Filesystem functionality is not yet available. This will be coming in a future release.
-:::
-
-```text title="help"
-AVAILABLE COMMANDS
-
-Bandwidth Policy Commands
-        bandwidth policy del: Allow the application to use unlimited bandwidth.
-        bandwidth policy set: Set the application bandwidth limit, in bytes per second.
-        bandwidth policy show: Get details of the application bandwidth limit, in bytes per second.
-
-Built-In Commands
-        clear: Clear the shell screen.
-        echo: Print message
-        exit, quit: Exit the api.
-        help: Display help about available commands.
-        history: Display or save the history of previously run commands
-        script: Read and execute commands from a file.
-
-Change log level commands
-        log debug: Enable debug level logging
-        log info: Enable info level logging
-        log off: Disable logging
-        log trace: Enable trace level logging
-
-Connect commands
-        connect hivemigrator: connect hivemigrator
-        connect livemigrator: connect livemigrator
-
-Exclusion Commands
-        exclusion add date: Create a new date-based rule.
-        exclusion add file-size: Create a new file size rule.
-        exclusion add regex: Create a new regex exclusion rule.
-        exclusion del: Delete an exclusion rule.
-        exclusion list: List all exclusion rules.
-        exclusion show: Get details for a particular exclusion rule.
-
-Filesystem Commands
-        filesystem add adls2 sharedKey: Add an ADLS2 FileSystem via HCFS API FileSystem With Shared Key
-        filesystem add gcs: Add a GCS FileSystem via HCFS API FileSystem
-        filesystem add hdfs: Add a Hadoop HDFS FileSystem FileSystem
-        filesystem add local: Add a Local FileSystem via HCFS
-        filesystem add s3a: Add a S3A FileSystem via HCFS API
-        filesystem auto-discover-source hdfs: Auto-discover-source Hadoop HDFS FileSystem FileSystem
-        filesystem clear: Delete all targets.
-        filesystem del: Delete a target.
-        filesystem list: List of targets.
-        filesystem show: Get target details.
-        filesystem types: List the types of target Filesystems available
-
-Hive Agent configuration commands
-        hive agent add azure: Add Azure SQL agent
-        hive agent add filesystem: Add filesystem agent.
-        hive agent add glue: Add AWS Glue agent
-        hive agent add hive: Add local or remote hive agent.
-        hive agent check: Check if agent configuration is valid & connectable
-        hive agent configure azure: Change agent configuration
-        hive agent configure filesystem: Change agent configuration
-        hive agent configure glue: Change agent configuration
-        hive agent configure hive: Change agent configuration
-        hive agent delete: Delete agent
-        hive agent list: List already added agents.
-        hive agent show: Show agent configuration.
-        hive agent types: Print list of supported agent types.
-
-Hive migration commands
-        hive migration add: create new migration
-        hive migration delete: delete migration from the list. Migration should be stopped
-        hive migration list: print a list of all migrations
-        hive migration pause: pause migration from the list
-        hive migration pause --all: pause all migrations
-        hive migration resume: resume migration from the list
-        hive migration resume --all: resume all migrations
-        hive migration show: show info about specific migration
-        hive migration start: start migration
-        hive migration start --all: start all migrations
-        hive migration status: show migration status
-        hive migration status --all: show all migration statuses
-        hive migration stop: stop running migration
-        hive migration stop --all: stop all running migrations
-
-Hive rule configuration commands
-        hive rule add, hive rule create: Add new hive migration rule
-        hive rule configure: Change selected rule parameters
-        hive rule delete: Delete selected hive migration rule
-        hive rule list: Get a list of defined rules
-        hive rule show: Show rule details
-
-License manipulation commands
-        license show: show used license
-        license upload: upload license file
-
-Migration Commands
-      * migration add: Create a new migration.
-        migration del: Delete a migration.
-        migration exclusion add: Add an exclusion to a migration.
-        migration exclusion del: Remove an exclusion from a migration.
-        migration list: List running and active migrations.
-        migration run: Start or resume a migration.
-        migration show: Get migration details.
-        migration stop: Stop migration.
-        status: Get migration status.
-
-Source Commands
-        source clear: Delete all sources.
-        source del: Delete a source.
-        source fs show: Show the source FileSystem Configuration
-
-Commands marked with (*) are currently unavailable.
-Type `help <command>` to learn more.
-
-Use backslashes to escape special characters ie. \\ will become \.
-You can test this with the echo command.
-```
 
 ```text
 help migration\ list
