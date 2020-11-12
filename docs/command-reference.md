@@ -202,7 +202,7 @@ OPTIONS
 
 * **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
-* **`--fs.azure.shared.key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
+* **`--shared.key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
 * **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
 #### Optional Parameters
@@ -214,7 +214,7 @@ OPTIONS
 #### Example
 
 ```text
-filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --fs.azure.shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31eIopUVA==
+filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
 ```
 
 ----
