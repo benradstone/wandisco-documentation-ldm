@@ -74,19 +74,25 @@ OPTIONS
 
 ----
 
-### `filesystem add adls2 sharedKey`
+### `filesystem add adls2 oauth`
 
-Add an Azure Data Lake Storage Gen 2 container as a migration target using the `filesystem add adls2 sharedKey` command, which requires credentials in the form of an account key.
+Add an Azure Data Lake Storage Gen 2 container as a migration target using the `filesystem add adls2 oauth` command, which requires a [service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) and [OAuth 2](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols) credentials.
 
-```text title="Add an ADLS Gen 2 file system"
+:::note
+The service principal that you want to use must have the **Storage Blob Data Owner** role assigned to the ADLS Gen2 storage account. See the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/storage/common/storage-auth-aad-rbac-portal#assign-an-azure-built-in-role) for further guidance.
+:::
+
+```text title="Add an ADLS2 FileSystem via HCFS API FileSystem With OAuth"
 SYNOPSYS
-        filesystem add adls2 sharedKey [--file-system-id] string
-                                       [--storage-account-name] string
-                                       [--fs.azure.shared.key] string
-                                       [--container.name] string
-                                       [--insecure]
-                                       [[--properties-file] list]
-                                       [[--properties] list]
+        filesystem add adls2 oauth [--file-system-id] string
+                                   [--storage-account-name] string
+                                   [--oauth2-client-id] string
+                                   [--oauth2-client-secret] string
+                                   [--oauth2-client-endpoint] string
+                                   [--container-name] string
+                                   [--insecure]
+                                   [[--properties-files] list]
+                                   [[--properties] string]
 
 OPTIONS
         --file-system-id  string
@@ -97,31 +103,42 @@ OPTIONS
 
                 [Mandatory]
 
-        --fs.azure.shared.key  string
+        --oauth2-client-id  string
 
                 [Mandatory]
 
-        --container.name  string
+        --oauth2-client-secret  string
+
+                [Mandatory]
+
+        --oauth2-client-endpoint  string
+
+                [Mandatory]
+
+        --container-name  string
 
                 [Mandatory]
 
         --insecure
                 [Optional, default = false]
 
-        --properties-file  list
+        --properties-files  list
                 Load properties from this file
                 [Optional, default = <none>]
 
-        --properties  list
-                Override properties in comma separated key/value list
-                [Optional, default = <none>]
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
-* **`--fs.azure.shared.key`** The shared account key to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
+* **`--oauth2-client-id`** The client ID (also known as [application ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in)) for your Azure service principal.
+* **`--oauth2-client-secret`** The client secret (also known as [application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)) for the Azure service principal.
+* **`--oauth2-client-endpoint`** The [client endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints) for the Azure service principal.  
+This will often take the form of `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` where `{tenant}` is your [directory ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in). You can specify a custom URL if desired (such as a proxy endpoint that manually interfaces with Azure Active Directory).
 * **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
 #### Optional Parameters
@@ -133,7 +150,71 @@ OPTIONS
 #### Example
 
 ```text
-filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --fs.azure.shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31eIopUVA==
+filesystem add adls2 oauth --file-system-id mytarget --storage-account-name myadls2 --oauth2-client-id b67f67ex-ampl-e2eb-bd6d-client9385id --oauth2-client-secret 2IPO8*secretk-9OPs8n*TexampleHJ= --oauth2-client-endpoint https://login.microsoftonline.com/78u098ex-ampl-e498-8bce-ndpoint5f2e5/oauth2/v2.0/token --container.name lm2target
+```
+
+----
+
+### `filesystem add adls2 sharedKey`
+
+Add an Azure Data Lake Storage Gen 2 container as a migration target using the `filesystem add adls2 sharedKey` command, which requires credentials in the form of an [account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys).
+
+```text title="Add an ADLS2 FileSystem via HCFS API FileSystem With Shared Key"
+SYNOPSYS
+        filesystem add adls2 sharedKey [--file-system-id] string
+                                       [--storage-account-name] string
+                                       [--shared-key] string
+                                       [--container-name] string
+                                       [--insecure]
+                                       [[--properties-files] list]
+                                       [[--properties] string]
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
+
+        --storage-account-name  string
+
+                [Mandatory]
+
+        --shared-key  string
+
+                [Mandatory]
+
+        --container-name  string
+
+                [Mandatory]
+
+        --insecure
+                [Optional, default = false]
+
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <nothing>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
+* **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
+* **`--shared.key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
+* **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
+
+#### Optional Parameters
+
+* **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication. This is referenced in the UI when **Use Secure Protocol** is unchecked.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
+
+#### Example
+
+```text
+filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
 ```
 
 ----
@@ -195,7 +276,14 @@ If Kerberos is enabled on your source environment, use the [`filesystem auto-dis
 
 ```text title="Add a Hadoop Distributed File System"
 SYNOPSYS
-        filesystem add hdfs [--file-system-id] string  [[--default-fs] string]  [[--user] string]  [[--kerberos-principal] string]  [[--kerberos-keytab] string]  [--source]  [[--properties-files] list]  [[--properties] string]
+        filesystem add hdfs [--file-system-id] string
+                            [[--default-fs] string]
+                            [[--user] string]
+                            [[--kerberos-principal] string]
+                            [[--kerberos-keytab] string]
+                            [--source]
+                            [[--properties-files] list]
+                            [[--properties] string]
 
 OPTIONS
         --file-system-id  string
@@ -303,9 +391,9 @@ OPTIONS
                 Load properties from these files
                 [Optional, default = <none>]
 
-        --properties  list
-                Override properties in comma separated key/value list
-                [Optional, default = <none>]
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -367,7 +455,8 @@ You can also manually configure the source HDFS filesystem using the [`filesyste
 
 ```text title="Auto-discover-source Hadoop HDFS FileSystem FileSystem"
 SYNOPSYS
-        filesystem auto-discover-source hdfs [[--kerberos-principal] string]  [[--kerberos-keytab] string]
+        filesystem auto-discover-source hdfs [[--kerberos-principal] string]
+                                             [[--kerberos-keytab] string]
 
 OPTIONS
         --kerberos-principal  string
