@@ -11,6 +11,7 @@ module.exports = {
       },
       'configuration',
       'command-reference',
+      'jar',
       'api-reference'
     ],
   },
