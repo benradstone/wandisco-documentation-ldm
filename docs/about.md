@@ -1,5 +1,6 @@
 ---
-id: "slug: /about.md"
+id: about
+slug: /
 title: LiveData Migrator
 sidebar_label: About LiveData Migrator
 ---
