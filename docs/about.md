@@ -1,6 +1,6 @@
 ---
 id: about
-slug: /
+slug: /about
 title: LiveData Migrator
 sidebar_label: About LiveData Migrator
 ---
