@@ -339,7 +339,7 @@ The following directories are used for the LiveData UI:
 
 ## Recommendations
 
-### Metadata migrations
+### Metadata migrations (preview)
 
 #### Enable Hive metastore event listener
 

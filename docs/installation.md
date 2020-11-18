@@ -4,7 +4,7 @@ title: Installation
 sidebar_label: Installation
 ---
 
-Ready to install? Check the prerequisites and then follow these steps to get up and running with LiveData Migrator.
+Ready to install? Check the prerequisites and then follow these steps to get up and running with LiveData Migrator. The latest version of LiveData Migrator includes a preview of a metadata migration feature. Prerequisites to migrate metadata are included in the list below, and you'll find instructions explaining how to use the feature throughout this guide.
 
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md).
 
@@ -23,7 +23,7 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
   * Hadoop client libraries must be installed on the Linux host.
   * Ability to authenticate as the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) (for example: `hdfs`).
   * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the HDFS superuser must be available on the Linux host.
-* If migrating metadata to or from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home):
+* If you want to migrate metadata to or from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) in our preview of the feature:
   * The Hive service must be present on the cluster.
   * SSH/CLI access to the cluster.
   * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the Hive service user must be available. The host for the keytab will depend on whether you deploy locally, remotely, or both (see the [`hive agent add hive`](./command-reference.md#hive-agent-add-hive) section for more information).
@@ -40,6 +40,8 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 The LiveData Migrator trial license is limited to 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits. [Contact WANdisco to upgrade to a full license.](https://www.wandisco.com)
 
 ## Download and install LiveData Migrator
+
+The latest version of LiveData Migrator includes a preview of functionality that you can use to migrate metadata.
 
 1. Download LiveData Migrator and upload to your chosen host. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop cluster.
 

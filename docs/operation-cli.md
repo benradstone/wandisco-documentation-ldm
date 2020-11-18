@@ -4,7 +4,7 @@ title: Using LiveData Migrator with the CLI
 sidebar_label: CLI
 ---
 
-You can use the command line interface (CLI) to create and manage resources that control your migrations in LiveData Migrator.
+You can use the command line interface (CLI) to create and manage resources that control your migrations in LiveData Migrator. The latest version of LiveData Migrator includes the ability to migrate metadata, which is explained in this article.
 
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
@@ -165,7 +165,9 @@ Migrations can be in one of eight states:
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
 
-## Connect to metastores or databases
+## Connect to metastores or databases (preview)
+
+This feature is in preview.
 
 ### Add hive agents
 
@@ -202,6 +204,8 @@ Metadata can be migrated in any direction between these supported metastore and 
 | [`hive agent types`](./command-reference.md#hive-agent-types) | List supported hive agent types |
 
 ## Define metadata rules
+
+This feature is in preview.
 
 ### Add hive rules
 
@@ -250,6 +254,8 @@ When [creating a metadata migration](#create-metadata-migrations), use the defau
 | [`hive rule show`](./command-reference.md#hive-rule-show) | Show the configuration of a hive rule |
 
 ## Migrate metadata
+
+This feature is in preview.
 
 ### Create metadata migrations
 
