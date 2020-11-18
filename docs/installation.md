@@ -14,7 +14,8 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ### Prerequisites
 
-* Linux host running either Red Hat, CentOS or Ubuntu.
+* Linux host
+  * See the release notes link in the [Before you start](#before-you-start) section for a list of supported operating systems.
 * Java 1.8 64-bit.
 * Network connectivity from your LiveData Migrator host to your target storage (for example: ADLS Gen2 endpoint or S3 bucket).
 * Port 8081 accessible on your Linux host (to access the UI through a web browser).
@@ -22,6 +23,10 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
   * Hadoop client libraries must be installed on the Linux host.
   * Ability to authenticate as the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) (for example: `hdfs`).
   * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the HDFS superuser must be available on the Linux host.
+* If migrating metadata to or from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home):
+  * The Hive service must be present on the cluster.
+  * SSH/CLI access to the cluster.
+  * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the Hive service user must be available. The host for the keytab will depend on whether you deploy locally, remotely, or both (see the [`hive agent add hive`](./command-reference.md#hive-agent-add-hive) section for more information).
 
 ### Machine specification
 
@@ -63,16 +68,12 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
    ```
 
    ```text
-   service one-ui-server status
+   service hivemigrator status
    ```
 
-1. If Kerberos is enabled in your environment:
-
-   1. Edit the Kerberos security properties in the `/etc/wandisco/livedata-migrator/application.properties` file.  
-      Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) section for details about the required properties.
-
-   1. Restart the LiveData Migrator service to make any configuration changes live:  
-      `service livedata-migrator restart`
+   ```text
+   service livedata-ui status
+   ```
 
 ## Using LiveData Migrator
 
