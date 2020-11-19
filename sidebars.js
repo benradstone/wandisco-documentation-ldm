@@ -3,7 +3,8 @@ module.exports = {
     Documentation: [
       'about',
       {
-        "Before you start": [
+        "Installation": [
+          'prereqs',
           'installation'
           ],
       },
@@ -15,7 +16,12 @@ module.exports = {
       },
       'configuration',
       'command-reference',
-      'api-reference'
+      {
+        "Alternatives to the UI or CLI": [
+          'jar',
+          'api-reference'
+          ],
+      },
     ],
   },
 };
