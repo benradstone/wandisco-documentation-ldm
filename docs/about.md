@@ -4,17 +4,11 @@ title: LiveData Migrator
 sidebar_label: About LiveData Migrator
 ---
 
-WANdisco LiveData Migrator is a fully self-service data and metadata migration solution that is immediate, live, and scalable.
+WANdisco LiveData Migrator migrates data from Hadoop to the cloud without disruption or downtime.
 
-**Immediate:** enabling administrators to easily deploy the solution and begin migration of data lake content to the cloud immediately. It is entirely non-intrusive and requires zero changes to applications, cluster or node configuration or operation.
+LiveData Migrator is a fully automated cloud migration solution that migrates HDFS data to the cloud, even while those data sets are under active change. LiveData Migrator is fully self-service requiring no WANdisco expertise. It is entirely non-intrusive and requires zero changes to applications, cluster, node configuration or operation. Migrations of any scale can begin immediately, and be performed while the source data is under active change without requiring any production system downtime or business disruption, and with zero risk of data loss.
 
-**Live:** WANdisco’s LiveData capabilities enable data migration to occur while the source data and metadata is under active change, without requiring any production system downtime or business disruption supporting complete and continuous data and metadata migration.
-
-**Scalable:** able to accommodate data migration at any scale, without any risk of data loss.
-
-[1 video link](https://www.wandisco.com?wvideo=wh9kubs1uq)
-
-[2 video link](https://www.wandisco.com?wvideo=wh9kubs1uq)
+![LiveData Platform for Azure](/img/ldm-video.png)[ldm video](https://wandisco.com/products/livedata-migrator?wvideo=gvswpzice8)
 
 ## Get started
 
