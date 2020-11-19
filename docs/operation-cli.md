@@ -4,7 +4,7 @@ title: Using LiveData Migrator with the CLI
 sidebar_label: CLI
 ---
 
-You can use the command line interface (CLI) to create and manage resources that control your migrations in LiveData Migrator.
+You can use the command line interface (CLI) to create and manage resources that control your migrations in LiveData Migrator. The latest version of LiveData Migrator includes the ability to migrate metadata, which is explained in this article.
 
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
@@ -165,7 +165,7 @@ Migrations can be in one of eight states:
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
 
-## Connect to metastores or databases
+## Connect to metastores or databases (preview)
 
 ### Add hive agents
 
@@ -201,7 +201,7 @@ Metadata can be migrated in any direction between these supported metastore and 
 | [`hive agent show`](./command-reference.md#hive-agent-show) | Show the configuration for a hive agent |
 | [`hive agent types`](./command-reference.md#hive-agent-types) | List supported hive agent types |
 
-## Define metadata rules
+## Define metadata rules (preview)
 
 ### Add hive rules
 
@@ -327,27 +327,3 @@ See the [How to upgrade your license](https://community.wandisco.com/s/article/H
 The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
 
 See the [Built-In Commands](./command-reference.md#built-in-commands) section in Command Reference for further details of the available commands.
-
-## Using the LiveData Migrator jar
-
-If you want to try out LiveData Migrator using a quick method, use the `livedata-migrator.jar`. This is an alternative to using the system service and it does not require configuration.
-
-:::important
-Use the system service instead for Production deployment as it allows you to maintain long-lived migrations, have a common configuration that survives service restarts, and retain logging information in a central directory.
-:::
-
-On the LiveData Migrator host, follow the steps below to run the jar:
-
-1. Switch to the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User).  
-   _Example_  
-   `su - hdfs`
-1. Change to the directory where the jar is located:  
-   `cd /opt/wandisco/livedata-migrator`
-1. Run the jar file to access the action prompt.
-   * If Kerberos is disabled in your environment, run:  
-     `java -jar livedata-migrator.jar`
-   * If Kerberos is enabled in your environment, you must obtain a ticket before running the jar.  
-     _Example_  
-     `kinit -kt /etc/security/keytabs/hdfs.keytab hdfs@REALM.COM`  
-     Afterwards, run:  
-     `java -Dlm.kerberos.is.enabled=true -jar livedata-migrator.jar`

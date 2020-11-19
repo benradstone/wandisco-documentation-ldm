@@ -1051,6 +1051,27 @@ migration new --path /repl1 --target mytarget –-migration-id myNewMigration --
 
 ----
 
+
+### `migration pending-region add`
+
+Add a pending region manually to re-scan a directory if it has been updated.
+
+```text title="Add a pending region"
+SYNOPSYS
+        migration pending-region add
+```
+
+#### Mandatory Parameter
+
+* **`--migration-id`** The identifier of the migration to show.
+* **`--path`** The path to the pending region you want to add.
+
+#### Example
+
+```text title="Add a pending region to a migration"
+migration pending-region add --migration-id myFirstMigration --path /dir1/userA
+```
+
 ### `migration run`
 
 Start a migration that was created without the `--auto-start` parameter.
@@ -1145,32 +1166,6 @@ Running: 0
 Ready: 1
      /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
 ```
-
-## Pending Region Commands
-
-----
-
-### `migration pending-region add`
-
-Add a pending region manually to re-scan a directory if it has been updated.
-
-```text title="Add a pending region"
-SYNOPSYS
-        migration pending-region add
-```
-
-#### Mandatory Parameter
-
-* **`--migration-id`** The identifier of the migration to show.
-* **`--path`** The path to the pending region you want to add.
-
-#### Example
-
-```text title="Add a pending region to a migration"
-migration pending-region add --migration-id myFirstMigration --path /dir1/userA
-```
-
-----
 
 ## Bandwidth Policy Commands
 

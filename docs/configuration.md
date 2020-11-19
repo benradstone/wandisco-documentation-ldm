@@ -337,11 +337,9 @@ The following directories are used for the LiveData UI:
 | `/opt/wandisco/ui` | Operation files |
 | `/var/run/wandisco/ui` | UI runtime state |
 
-## Recommendations
+## Metadata migrations (preview)
 
-### Metadata migrations
-
-#### Enable Hive metastore event listener
+### Enable Hive metastore event listener
 
 :::note
 This recommendation is currently supported on HDP platforms only.

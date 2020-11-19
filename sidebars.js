@@ -2,7 +2,12 @@ module.exports = {
   someSidebar: {
     Documentation: [
       'about',
-      'installation',
+      {
+        "Installation": [
+          'prereqs',
+          'installation'
+          ],
+      },
       {
         "Using LiveData Migrator": [
           'operation-ui',
@@ -11,7 +16,12 @@ module.exports = {
       },
       'configuration',
       'command-reference',
-      'api-reference'
+      {
+        "Alternatives to the UI or CLI": [
+          'jar',
+          'api-reference'
+          ],
+      },
     ],
   },
 };
