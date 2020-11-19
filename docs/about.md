@@ -4,9 +4,9 @@ title: LiveData Migrator
 sidebar_label: LiveData Migrator
 ---
 
-LiveData Migrator is a fully automated cloud migration solution that migrates HDFS data to the cloud, even while those data sets are under active change. LiveData Migrator is fully self-service requiring no WANdisco expertise. It is entirely non-intrusive and requires zero changes to applications, cluster, node configuration or operation. Migrations of any scale can begin immediately, and be performed while the source data is under active change without requiring any production system downtime or business disruption, and with zero risk of data loss.
+LiveData Migrator _migrates changing data_ at scale from HDFS to your choice of target environment, including the ongoing changes made to those data before, throughout and after migration. Targets include  [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [GCS](https://cloud.google.com/storage), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), and [S3](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) (including [IBM COS](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage)).
 
-[![LiveData Migrator video](/img/ldm-video.png)](https://wandisco.com/products/livedata-migrator?wvideo=gvswpzice8 "Live Data Migrator overview")
+The latest version of LiveData Migrator includes a **preview** of a feature that migrates metadata in either direction between metastores and databases. Supported platforms include [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview), [AWS-hosted databases](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html), and local filesystems.
 
 ## Get started
 
