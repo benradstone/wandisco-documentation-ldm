@@ -2,7 +2,11 @@ module.exports = {
   someSidebar: {
     Documentation: [
       'about',
-      'installation',
+      {
+        "Before you start": [
+          'installation'
+          ],
+      },
       {
         "Using LiveData Migrator": [
           'operation-ui',
