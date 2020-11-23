@@ -1288,7 +1288,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--db-server-name`** The Azure SQL database server name.
+* **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted.
 * **`--database-name`** The Azure SQL database name.
 * **`--database-user`** The user name to access the database.
 * **`--database-password`** The user password to access the database.
