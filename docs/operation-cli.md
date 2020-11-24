@@ -249,7 +249,7 @@ When [creating a metadata migration](#create-metadata-migrations), use the defau
 | [`hive rule list`](./command-reference.md#hive-rule-list) | List all hive rules |
 | [`hive rule show`](./command-reference.md#hive-rule-show) | Show the configuration of a hive rule |
 
-## Migrate metadata
+## Migrate metadata (preview)
 
 ### Create metadata migrations
 
@@ -293,11 +293,7 @@ LiveData Migrator uses pending regions to keep your directories up to date if th
 
 LiveData Migrator collects pending regions automatically during a migration, but you can manually add them if you want the directories to be re-scanned after further updates. You can also re-run the entire migration by making the root directory the pending region.
 
-Add a pending region to a migration by running the `migration pending-region add` command.
-
-```text title="Example"
-migration pending-region add --migration-id myFirstMigration --path /dir1/userA
-```
+[`migration pending-region add`](./command-reference.md#migration-pending-region-add)
 
 ## Bandwidth management
 
