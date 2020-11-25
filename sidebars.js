@@ -30,7 +30,7 @@ module.exports = {
           'connect-to-metastores',
           'define-metadata-rules',
           'migrate-metadata',
-          'license-bandwidth'
+          'license-bandwidth-cli'
           ],
       },
       {
