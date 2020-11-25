@@ -1,12 +1,10 @@
 ---
 id: operation-ui
-title: Before you start
+title: Using LiveData Migrator with the UI
 sidebar_label: Before you start
 ---
 
 The UI can manage multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
-
-If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
 ## Before you start
 

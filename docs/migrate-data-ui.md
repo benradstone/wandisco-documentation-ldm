@@ -4,13 +4,11 @@ title: Migrate data with the UI
 sidebar_label: Migrate data
 ---
 
-## Create migrations
-
 Migrations transfer existing data from the defined source to a target. LiveData Migrator migrates any changes made to the source data while it is being migrated and ensures that the target is up to date with those changes. It does this while continuing to perform the migration.
 
 You will typically create multiple migrations so that you can select specific content from your source storage by Path. You can also migrate to multiple independent storages at the same time by defining multiple migration resources.
 
-To create a migration:
+## Create a migration
 
 1. Choose a source and target from previously defined [storages](#configure-storage).
 1. Choose the Path to set the scope of the migration.
