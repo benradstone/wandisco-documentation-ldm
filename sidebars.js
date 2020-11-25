@@ -20,8 +20,7 @@ module.exports = {
           ],
       },
       {
-        "Using LiveData Migrator with the CLI": [
-          'operation-ui',
+        "Using LiveData Migrator (CLI)": [
           'operation-cli'
           ],
       },
