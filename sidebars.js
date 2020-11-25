@@ -5,7 +5,8 @@ module.exports = {
       {
         "Installation": [
           'prereqs',
-          'installation'
+          'installation',
+          'configuration'
           ],
       },
       {
@@ -21,7 +22,15 @@ module.exports = {
       },
       {
         "Using LiveData Migrator (CLI)": [
-          'operation-cli'
+          'operation-cli',
+          'configure-storage-cli',
+          'configure-exclusions-cli',
+          'migrate-data-cli',
+          'manage-migrations-cli',
+          'connect-to-metastores',
+          'define-metadata-rules',
+          'migrate-metadata',
+          'license-bandwidth'
           ],
       },
       {
@@ -29,7 +38,6 @@ module.exports = {
           'uc-on-prem-hadoop-hdi'
           ],
       },
-      'configuration',
       'command-reference',
       {
         "Alternatives to the UI or CLI": [
