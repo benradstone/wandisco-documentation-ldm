@@ -14,13 +14,13 @@ module.exports = {
           'operation-cli'
           ],
       },
-      'configuration',
       {
         "Common Use Cases": [
           'uc-on-prem-hadoop-hdi'
           ],
       },
       'command-reference',
+      'configuration',
       {
         "Alternatives to the UI or CLI": [
           'jar',
