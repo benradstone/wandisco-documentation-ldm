@@ -1,5 +1,5 @@
 ---
-id: how-ui-words
+id: how-ui-works
 title: How the UI works
 sidebar_label: How the UI works
 ---

@@ -14,6 +14,8 @@ module.exports = {
           'how-ui-works',
           'configure-storage-ui',
           'configure-exclusions-ui',
+          'migrate-data-ui',
+          'manage-bandwidth-ui'
           ],
       },
       {
