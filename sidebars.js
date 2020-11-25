@@ -9,9 +9,11 @@ module.exports = {
           ],
       },
       {
-        "Using LiveData Migrator with the UI": [
+        "Using LiveData Migrator (UI)": [
           'operation-ui',
-          'operation-cli'
+          'how-ui-works',
+          'configure-storage-ui',
+          'configure-exclusions-ui',
           ],
       },
       {
