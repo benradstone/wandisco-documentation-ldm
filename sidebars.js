@@ -9,7 +9,13 @@ module.exports = {
           ],
       },
       {
-        "Using LiveData Migrator": [
+        "Using LiveData Migrator with the UI": [
+          'operation-ui',
+          'operation-cli'
+          ],
+      },
+      {
+        "Using LiveData Migrator with the CLI": [
           'operation-ui',
           'operation-cli'
           ],
@@ -19,8 +25,8 @@ module.exports = {
           'uc-on-prem-hadoop-hdi'
           ],
       },
-      'command-reference',
       'configuration',
+      'command-reference',
       {
         "Alternatives to the UI or CLI": [
           'jar',
