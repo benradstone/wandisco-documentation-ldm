@@ -135,9 +135,9 @@ OPTIONS
 
 * **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
-* **`--oauth2-client-id`** The client ID (also known as [application ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in)) for your Azure service principal.
-* **`--oauth2-client-secret`** The client secret (also known as [application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)) for the Azure service principal.
-* **`--oauth2-client-endpoint`** The [client endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints) for the Azure service principal.  
+* **`--oauth2-client-id`** The client ID (also known as [application ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in)) for your Azure service principal. This is referenced in the UI as **Client ID**.
+* **`--oauth2-client-secret`** The client secret (also known as [application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)) for the Azure service principal. This is referenced in the UI as **Secret**.
+* **`--oauth2-client-endpoint`** The [client endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints) for the Azure service principal. This is referenced in the UI as **Endpoint**.  
 This will often take the form of `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` where `{tenant}` is the [directory ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in) for the Azure service principal. You can specify a custom URL if desired (such as a proxy endpoint that manually interfaces with Azure Active Directory).
 * **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
@@ -275,23 +275,27 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new file system resource.
-* **`--bucket-name`** The bucket name of a Google Cloud Storage account.
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
+* **`--bucket-name`** The bucket name of a Google Cloud Storage account. This is referenced in the UI as **Bucket Name**.
 
 #### Service account key parameters
 
 :::info
 Provide your service account key for the GCS bucket by choosing one of the parameters below.
+
+You can also upload the service account key directly when using the UI (this is not supported through the CLI).
 :::
 
-* **`--service-account-json-key-file-server-location`** The absolute filesystem path on the LiveData Migrator server of your service account key file in JSON format. You can either [create a GCS service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) or [use an existing one](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#listing_service_account_keys).
-* **`--service-account-p12-key-file-server-location`** The absolute filesystem path on the LiveData Migrator server of your service account key file in P12 format. You can either [create a GCS service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) or [use an existing one](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#listing_service_account_keys).
+* **`--service-account-json-key-file-server-location`** The absolute filesystem path on the LiveData Migrator server of your service account key file in JSON format. You can either [create a GCS service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) or [use an existing one](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#listing_service_account_keys).  
+This is referenced in the UI as **Key File** when the _Key File Options -> Provide a Path_ option is selected.
+* **`--service-account-p12-key-file-server-location`** The absolute filesystem path on the LiveData Migrator server of your service account key file in P12 format. You can either [create a GCS service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) or [use an existing one](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#listing_service_account_keys).  
+This is referenced in the UI as **Key File** when the _Key File Options -> Provide a Path_ option is selected.
 * **`--service-account-json-key-file`** The absolute filesystem path on the host running the LiveData Migrator CLI of your service account key file in JSON format. Only use this parameter if you are running the LiveData Migrator CLI on a different host to your LiveData Migrator server.
 * **`--service-account-p12-key-file`** The absolute filesystem path on the host running the LiveData Migrator CLI of your service account key file in P12 format. Only use this parameter if you are running the LiveData Migrator CLI on a different host to your LiveData Migrator server.
 
 #### Optional Parameters
 
-* **`--service-account-email`** The email address linked to your GCS service account.
+* **`--service-account-email`** The email address linked to your GCS service account. This is referenced in the UI as **Email address** and is required when selecting the **Upload P12 Key File** option.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
@@ -369,7 +373,7 @@ OPTIONS
 * **`--user`** The name of the HDFS user to be used when performing operations against the file system. In environments where Kerberos is disabled, this user must be the HDFS super user, such as `hdfs`.
 * **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
 * **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
-* **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when selecting the **Add Source** option.
+* **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
@@ -478,15 +482,18 @@ OPTIONS
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
+#### S3a Properties
+
 :::info
-When adding properties via the API or UI, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
+When adding properties via the UI or API, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
 :::
 
-* `fs.s3a.impl` (default `org.apache.hadoop.fs.s3a.S3AFileSystem`)
-* `fs.AbstractFileSystem.s3a.impl` (default `org.apache.hadoop.fs.s3a.S3A`)
-* `fs.s3a.user.agent.prefix` (default `WANdisco/LiveDataMigrator`)
-* `fs.s3a.impl.disable.cache` (default `true`)
-* `fs.hadoop.tmp.dir`(default `tmp`)
+* **`fs.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3AFileSystem`): The implementation class of the S3A Filesystem.
+* **`fs.AbstractFileSystem.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3A`): The implementation class of the S3A AbstractFileSystem.
+* **`fs.s3a.user.agent.prefix`** (default `WANdisco/LiveDataMigrator`): Sets a custom value that will be pre-pended to the User-Agent header sent in
+    HTTP requests to the S3 back-end by S3AFileSystem.
+* **`fs.s3a.impl.disable.cache`** (default `true`): Disables the S3 file system cache when set to 'true'.
+* **`fs.hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
 
 #### Example
 
@@ -989,20 +996,24 @@ SYNOPSYS
 
 ----
 
-### `migration new`
+### `migration add`
 
 Create a new migration to initiate data migration from your source file system.
 
 ```text title="Create a new migration"
 SYNOPSYS
-        migration new [--path] string
+        migration add [[--migration-id] string]
+                      [--path] string
                       [--target] string
-                      [--migration-id] string
-                      [--exclusions] string
+                      [[--exclusions] string]
+                      [[--action-policy] string]
                       [--auto-start]
-                      [--action-policy] string
 
 OPTIONS
+        --migration-id  string
+
+                [Optional, default = <nothing>]
+
         --path  string
 
                 [Mandatory]
@@ -1011,29 +1022,26 @@ OPTIONS
 
                 [Mandatory]
 
-        –-migration-id  string
-
-                [Mandatory]
-
         --exclusions  string
 
                 [Optional, default = <none>]
 
+        --action-policy  string
+
+                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
+
         --auto-start
                 [Optional, default = false]
-
-        --action-policy  string
-                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
 ```
 
 #### Mandatory Parameters
 
 * **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target. This is referenced in the UI as **Path for {source-filesystem}**.
 * **`--target`** Specifies the name of the target file system resource to which migration will occur. This is referenced in the UI as **Target**.
-* **`--migration-id`** Provide an identifier for the new migration.
 
 #### Optional Parameters
 
+* **`--migration-id`** Provide an identifier for the new migration. An identifier will be auto-generated if one is not provided.
 * **`--exclusions`** A comma-separated list of exclusions by name. This is referenced in the UI as **Add new exclusion**.
 * **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run. This is referenced in the UI as **Auto-start migration**.
 * **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size. This is referenced in the UI as **Skip Or Overwrite Settings**.  
@@ -1046,11 +1054,10 @@ OPTIONS
 #### Example
 
 ```text
-migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
+migration add --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
 ```
 
 ----
-
 
 ### `migration pending-region add`
 
@@ -1071,6 +1078,8 @@ SYNOPSYS
 ```text title="Add a pending region to a migration"
 migration pending-region add --migration-id myFirstMigration --path /dir1/userA
 ```
+
+----
 
 ### `migration run`
 
@@ -1184,7 +1193,9 @@ SYNOPSYS
 
 ### `bandwidth policy set`
 
-Delete the current bandwidth policy and revert back to the default policy (unlimited bandwidth).
+Set the bandwidth policy that will determine how much bandwidth LiveData Migrator can use.
+
+If no policy is defined, the default policy is unlimited bandwidth.
 
 ```text title="Set the application bandwidth limit, in bytes per second"
 SYNOPSYS
@@ -2322,7 +2333,7 @@ SYNOPSYS
 
 ### `echo`
 
-Prints whatever text that you write to the console. This can be used to sanity check a command before running it (for example: `echo migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles`).
+Prints whatever text that you write to the console. This can be used to sanity check a command before running it (for example: `echo migration add --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles`).
 
 ```text title="Print message"
 SYNOPSYS
