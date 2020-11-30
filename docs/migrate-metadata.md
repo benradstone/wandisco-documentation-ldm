@@ -4,6 +4,8 @@ title: Migrate metadata
 sidebar_label: Migrate metada
 ---
 
+Once you have [connected to your metastores](./connect-to-metastores.md) and [defined metadata rules](./define-metadata-rules.md) you're ready to migrate metadata.
+
 ## Create metadata migrations
 
 Migrate metadata from your source metastore/database to a target metastore/database using the `hive migration` command. Migrations will transfer existing metadata, as well as any subsequent changes made to the source metadata (in its scope), while HiveMigrator remains in operation.

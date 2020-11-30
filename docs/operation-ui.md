@@ -4,7 +4,7 @@ title: Using LiveData Migrator with the UI
 sidebar_label: Before you start
 ---
 
-The UI can manage multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
+The LiveData Migrator UI can manage multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
 
 ## Ports
 
