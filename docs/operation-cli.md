@@ -4,7 +4,7 @@ title: Using LiveData Migrator with the CLI
 sidebar_label: Before you start
 ---
 
-You can use the command line interface (CLI) to create and manage resources that control your migrations in LiveData Migrator.
+You can use the LiveData Migrator command line interface (CLI) to create and manage resources that control your migrations in LiveData Migrator.
 
 ## Log in
 

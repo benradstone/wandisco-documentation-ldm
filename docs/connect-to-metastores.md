@@ -4,13 +4,15 @@ title: Connect to metastores
 sidebar_label: Connect to metastores
 ---
 
+Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
+
+## Add hive agents
+
 Hive agents provide LiveData Migrator with the information needed to read content from your source metastore/database and migrate content to your target metastore/database.
 
 A variety of platforms are supported, including [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview), [AWS-hosted database](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html), and local filesystem.
 
 Metadata can be migrated in any direction between these supported metastore and database formats.
-
-## Add hive agents
 
 | Command | Action |
 |:---|:---|
@@ -37,3 +39,7 @@ Metadata can be migrated in any direction between these supported metastore and 
 | [`hive agent list`](./command-reference.md#hive-agent-list) | List all configured hive agents |
 | [`hive agent show`](./command-reference.md#hive-agent-show) | Show the configuration for a hive agent |
 | [`hive agent types`](./command-reference.md#hive-agent-types) | List supported hive agent types |
+
+## Next Steps
+
+Once you have connected to your metastores, [define metadata rules](./define-metadata-rules.md) to define which databases and tables you want to migrate.

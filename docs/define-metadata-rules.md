@@ -4,6 +4,8 @@ title: Define metadata rules
 sidebar_label: Define metadata rules
 ---
 
+Define which databases and tables you want to migrate by creating hive rules. Once your rules are in place, you're ready to [migrate metadata](./migrate-metadata.md).
+
 ## Add hive rules
 
 :::important
@@ -11,8 +13,6 @@ Ensure that you have [migrated](./migrate-data-cli) the HCFS data for the databa
 
 Both HCFS data and associated metadata are needed before successful queries can be run on migrated databases.
 :::
-
-Define which databases and tables you want to migrate by creating hive rules.
 
 Create a database pattern and a table pattern using [regex](https://regex101.com/) that will match the databases and tables you want to migrate. For example, using `--database-pattern test*` will match any database with "test" at the beginning of its name, such as `test01`, `test02`, `test03`.
 
