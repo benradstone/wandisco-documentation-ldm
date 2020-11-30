@@ -24,8 +24,6 @@ Use the Storage panel to:
 * Add further targets
 * Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers
 
-For more information about sources and targets, see the [introduction to LiveData Migrator](./about.md).
-
 ## Rules and Migrations
 
 The Rules and Migrations panel in LiveData Migrator shows migrations and their progress. If the UI also manages LiveData Plane, the panel will also show rules.

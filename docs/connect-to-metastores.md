@@ -6,7 +6,7 @@ sidebar_label: Connect to metastores
 
 ## Add hive agents
 
-Add hive agents to provide HiveMigrator with the information needed to read content from your source metastore/database and migrate content to your target metastore/database.
+Add hive agents to provide LiveData Migrator with the information needed to read content from your source metastore/database and migrate content to your target metastore/database.
 
 A variety of platforms are supported, including [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview), [AWS-hosted database](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html), and local filesystem.
 

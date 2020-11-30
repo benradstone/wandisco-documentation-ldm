@@ -1,6 +1,6 @@
 ---
 id: manage-bandwidth-ui
-title: Bandwidth Management with the UI
+title: Manage Bandwidth with the UI
 sidebar_label: Manage bandwidth
 ---
 

@@ -411,3 +411,7 @@ When deploying a hive agent for a HDInsights cluster (which can either be [Azure
 This is different from the majority of Hadoop clusters, as such, it may be necessary to adjust this property in your HDInsights cluster so that it is the same as your source environment.
 
 Doing so will allow you to start using your source data and metadata on your HDInsights cluster immediately after migration, as it will be referenced correctly by your target metastore/database.
+
+## Next Steps
+
+Once you've performed any configuration for your setup, you're ready to migrate data. You can use LiveData Migrator with the [UI](./operation-ui.md) or the [CLI](./operation-cli.md).

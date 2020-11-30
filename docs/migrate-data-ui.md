@@ -10,10 +10,10 @@ You will typically create multiple migrations so that you can select specific co
 
 ## Create a migration
 
-1. Choose a source and target from previously defined [storages](#configure-storage).
+1. Choose a source and target from previously defined [storages](./configure-storage-ui.md).
 1. Choose the Path to set the scope of the migration.
 1. Enable the **Auto-start migration** option if you want to start the migration immediately after creation.  
-   Migrations can be started at a later point when [viewing migration details](#view-migrations).
+   Migrations can be started at a later point when [viewing migration details](./manage-migrations-ui.md).
 1. [Apply any exclusions](#assign-exclusions-to-a-new-migration) to reduce the scope within this Path.
 1. Select the **Overwrite** or **Skip if Size Match** setting for the migration.  
    * **Skip if Size Match** - If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
@@ -21,7 +21,7 @@ You will typically create multiple migrations so that you can select specific co
 
 If you've already migrated some data from the same source to the same target, you can choose whether to overwrite all the content (Overwrite) or only migrate new content that isn't already there (Skip if Size Match).
 
-### Assign exclusions to a new migration
+## Assign exclusions to a new migration
 
 Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions.
 

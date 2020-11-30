@@ -6,8 +6,6 @@ sidebar_label: Before you start
 
 You can use the command line interface (CLI) to create and manage resources that control your migrations in LiveData Migrator. The latest version of LiveData Migrator includes the ability to migrate metadata, which is explained in this article.
 
-If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
-
 ## Log in
 
 Log in to the LiveData Migrator CLI using the following command:

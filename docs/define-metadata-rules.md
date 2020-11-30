@@ -7,7 +7,7 @@ sidebar_label: Define metadata rules
 ## Add hive rules
 
 :::important
-Ensure that you have [migrated](#migrate-data) the HCFS data for the databases and tables that you want to migrate.
+Ensure that you have [migrated](./migrate-data-cli) the HCFS data for the databases and tables that you want to migrate.
 
 Both HCFS data and associated metadata are needed before successful queries can be run on migrated databases.
 :::
